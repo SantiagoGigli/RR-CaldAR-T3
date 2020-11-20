@@ -1,0 +1,25 @@
+{
+  "name": "rr-caldar-t3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SantiagoGigli/RR-CaldAR-T3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SantiagoGigli/RR-CaldAR-T3/issues"
+  },
+  "homepage": "https://github.com/SantiagoGigli/RR-CaldAR-T3#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
