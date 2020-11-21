@@ -22,3 +22,13 @@ getTechniciansAll = () => {
 }
 
 getTechniciansAll();
+
+// Get technicians by ID
+
+getTechnicianById = () => {
+  app.get('/technicians/:id', (req,res) => {
+    res.json(technicians.filter(tech => tech.id === parseInt(req.params.id)))
+  })
+}
+
+getTechnicianById();
