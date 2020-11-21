@@ -32,3 +32,19 @@ getTechnicianById = () => {
 }
 
 getTechnicianById();
+
+// Get technicians by attribute
+
+
+
+
+
+// Delete technicians by ID
+
+deleteTechnicianById = () => {
+  app.delete('/technicians/:id', (req,res) => {
+    res.json({msg: `Technician ${req.params.id} deleted`, technicians: technicians.filter(tech => tech.id !== parseInt(req.params.id))})
+  })
+}
+
+deleteTechnicianById();
