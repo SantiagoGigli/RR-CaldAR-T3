@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const buildingsData = require('../data/BULDINGS_MOCK_DATA');
+let buildingsData = require('../data/BULDINGS_MOCK_DATA');
 
 router.get('/getAllBuildings', (req, res) => {
     res.json(buildingsData);
@@ -30,7 +30,8 @@ router.delete('/deleteById/:id', (req, res) => {
     const requestBuildingId = parseInt(req.params.id);
     const building = buildingsData.some(building => building.id === requestBuildingId);
     if (building) {
-        res.json({msg: 'Building deleted', buildings: buildingsData.filter(building => building.id !== requestBuildingId)});
+        buildingsData = buildingsData.filter(building => building.id !== requestBuildingId);
+        res.json({msg: 'Building deleted', buildings: buildingsData});
     } else {
         res.status(400).json({msg: `The building with id ${requestBuildingId} doesn't exist`});
     }
