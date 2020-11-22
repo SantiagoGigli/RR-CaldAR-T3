@@ -35,12 +35,11 @@ getCustomerById();
 
 //get customers by name
 
-/*
+
 getCustomerByAttribute = () => {
-  app.get('/customers/:customerType', (req,res) => {
-    res.json(customers.filter(customers => customers.customerType === JSON.stringify(req.params.customerType))
+  app.get('/customers/customertype/:customerType', (req,res) => {
+    res.json(customers.filter(customers => customers.customerType.includes(req.params.customerType)))
   })
 }
 
 getCustomerByAttribute();
-*/
