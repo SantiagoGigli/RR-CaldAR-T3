@@ -26,4 +26,14 @@ router.get('/getByAttribute', (req, res) => {
     matchingBuildings.length ? res.json(matchingBuildings) : res.status(400).json({msg: 'There isn\'t any building match with your search'})
 });
 
+router.delete('/deleteById/:id', (req, res) => {
+    const requestBuildingId = parseInt(req.params.id);
+    const building = buildingsData.some(building => building.id === requestBuildingId);
+    if (building) {
+        res.json({msg: 'Building deleted', buildings: buildingsData.filter(building => building.id !== requestBuildingId)});
+    } else {
+        res.status(400).json({msg: `The building with id ${requestBuildingId} doesn't exist`});
+    }
+});
+
 module.exports = router;
