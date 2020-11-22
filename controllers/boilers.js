@@ -10,7 +10,16 @@ router.get('/boilers',(req,res)=>{
 })
 
 //Get boiler by Id
+router.get('/boilers/:id',(req,res)=>{
+    const found=boilersData.some(boiler=>boiler.id===parseInt(req.params.id));
 
+    if (found){
+        res.json(boilersData.filter(boiler=>boiler.id===parseInt(req.params.id)));
+    }
+    else{
+        res.status(400).json({msg: 'The boiler with id ' + req.params.id + ' does not exist'});
+    }
+});
 
 //getBoilerByAttribute
 
