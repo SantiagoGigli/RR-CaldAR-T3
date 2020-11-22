@@ -1,4 +1,4 @@
-const buildingMockData = [{"id":1,"fullName":"Nickolai","city":"Saint-Étienne","address":"793 North Trail","postalCode":"42963 CEDEX 9","boilersId":[44,25,16,39],"owner":3},
+[{"id":1,"fullName":"Nickolai","city":"Saint-Étienne","address":"793 North Trail","postalCode":"42963 CEDEX 9","boilersId":[44,25,16,39],"owner":3},
 {"id":2,"fullName":"Pietrek","city":"Malawag","address":"4 Blackbird Junction","postalCode":"4022","boilersId":[43,15,46],"owner":1},
 {"id":3,"fullName":"Marysa","city":"Khamyāb","address":"373 Dakota Drive","postalCode":null,"boilersId":[27,27],"owner":null},
 {"id":4,"fullName":"Mavra","city":"Chubek","address":"8 Namekagon Junction","postalCode":null,"boilersId":[2,19],"owner":12},
@@ -997,6 +997,4 @@ const buildingMockData = [{"id":1,"fullName":"Nickolai","city":"Saint-Étienne",
 {"id":997,"fullName":"Efrem","city":"Artemivs’k","address":"80604 Farragut Avenue","postalCode":null,"boilersId":[29,4,23,30],"owner":null},
 {"id":998,"fullName":"Brinn","city":"Huancheng","address":"95 Park Meadow Point","postalCode":null,"boilersId":[5,12,17],"owner":null},
 {"id":999,"fullName":"Lydia","city":"Tarusa","address":"4 Northport Alley","postalCode":"249111","boilersId":[13,42,45,15],"owner":null},
-{"id":1000,"fullName":"Fayre","city":"Berestechko","address":"5 Sunnyside Center","postalCode":null,"boilersId":[44,24],"owner":null}];
-
-module.exports = buildingMockData;
+{"id":1000,"fullName":"Fayre","city":"Berestechko","address":"5 Sunnyside Center","postalCode":null,"boilersId":[44,24],"owner":null}]
