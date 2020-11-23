@@ -1,50 +1,37 @@
 const express = require('express');
-const app = express();
-const technicians = require('../data/technicians.json');
 const fs = require('fs');
+const technicians = require('../data/technicians.json');
+const app = express();
 
 // Get all the technicians
 
-getTechniciansAll = () => {
-    app.get('/technicians', (req,res)=>{
-      res.json(technicians);
-    })
-  }
-  getTechniciansAll();
+app.get('/getTechniciansAll', (req,res)=>{
+	res.json(technicians);
+});
   
 // Get technicians by ID
 
-getTechnicianById = () => {
-    app.get('/technicians/:id', (req,res) => {
-        res.json(technicians.filter(tech => tech.id === parseInt(req.params.id)));
-    })
-}
-getTechnicianById();
+app.get('/getTechnicianById', (req,res) => {
+  res.json(technicians.filter(tech => tech.id === parseInt(req.query.id)));
+});
 
 // Get technicians by attribute (Name)
 
-TechniciansByAttribute = () => {
-    app.get('/technicians/firstname/:first_name', (req,res)=>{
-        res.json(technicians.filter(tech => tech.first_name.includes(req.params.first_name)));
-    })
-}
-TechniciansByAttribute();
+app.get('/getTechniciansByName', (req,res)=>{
+  res.json(technicians.filter(tech => tech.first_name.includes(req.query.first_name)));
+});
 
 // Delete technicians by ID
 
-deleteTechnicianById = () => {
-    app.delete('/technicians/:id', (req,res) => {
-        const techniciansLeft = technicians.filter(tech => tech.id !== parseInt(req.params.id));
-        fs.writeFile('data/technicians.json',JSON.stringify(techniciansLeft),err=>{
-            if(err){
-                console.log(err);
-            }   else{
-                    res.json({msg: `Technician ${req.params.id} deleted`, Technicians: techniciansLeft });
-                }
-        });
-        
-    });
-}
-deleteTechnicianById();
+app.get('/deleteTechnicianById', (req,res) => {
+	const techniciansLeft = technicians.filter(tech => tech.id !== parseInt(req.query.id));
+	fs.writeFile('data/technicians.json',JSON.stringify(techniciansLeft),err=>{
+		if(err){
+			console.log(err);
+		}	else{
+				res.json({msg: `Technician ${req.params.id} deleted`, Technicians: techniciansLeft });
+			}
+	});
+});
 
 module.exports = app;
