@@ -11,7 +11,7 @@ router.get('/getByType/:type', (req,res)=>{
     
     console.log('getBoilersTypesByType:'+req.params.type);
 
-    const found=boilers_types.some(boiler_type=>boiler_type.description.substring(5,6)==req.params.type)
+    const found=boilers_types.some(boiler_type=>boiler_type.description.substring(5,6)==req.params.type);
     
     if(found){
         res.json(boilers_types.filter(boiler_type=>boiler_type.description.substring(5,6)==req.params.type));
@@ -57,7 +57,7 @@ router.delete('/deleteById/:id', (req, res) => {
                 console.log(err);                
             }            
         });        
-        delete require.cache[require.resolve(dir_json)]   // Deleting loaded module
+        delete require.cache[require.resolve(dir_json)];   // Deleting loaded module
         boilers_types = require(dir_json);
         res.json({msg: 'Boiler Type with id '+ req.params.id+' deleted', NewBoilersTypes: boilers_types});
     } else {
