@@ -1,10 +1,12 @@
-[{"id":1,"first_name":"Gerald","last_name":"Pinel","email":"gpinel0@flavors.me","typeIds":[{}],"skillsId":[],"hour_rate":"$18.31","daily_capacity":1},
-{"id":2,"first_name":"Brina","last_name":"Larkkem","email":"blarkkem1@desdev.cn","typeIds":[{},{}],"skillsId":[],"hour_rate":"$4.69","daily_capacity":8},
-{"id":3,"first_name":"Alvin","last_name":"Ryland","email":"aryland2@yale.edu","typeIds":[{}],"skillsId":[],"hour_rate":"$33.99","daily_capacity":6},
-{"id":4,"first_name":"Osmond","last_name":"Crinage","email":"ocrinage3@usa.gov","typeIds":[{}],"skillsId":[],"hour_rate":"$22.81","daily_capacity":7},
-{"id":5,"first_name":"Linoel","last_name":"McTerry","email":"lmcterry4@statcounter.com","typeIds":[{},{}],"skillsId":[],"hour_rate":"$33.45","daily_capacity":5},
-{"id":6,"first_name":"Debra","last_name":"Filipowicz","email":"dfilipowicz5@reddit.com","typeIds":[{},{}],"skillsId":[],"hour_rate":"$29.92","daily_capacity":6},
-{"id":7,"first_name":"Matthus","last_name":"Asbrey","email":"masbrey6@fema.gov","typeIds":[{}],"skillsId":[],"hour_rate":"$16.91","daily_capacity":4},
-{"id":8,"first_name":"Leonelle","last_name":"Gatman","email":"lgatman7@unicef.org","typeIds":[{},{}],"skillsId":[],"hour_rate":"$45.31","daily_capacity":1},
-{"id":9,"first_name":"Cristian","last_name":"Bagniuk","email":"cbagniuk8@amazon.co.uk","typeIds":[{},{},{}],"skillsId":[],"hour_rate":"$45.31","daily_capacity":3},
-{"id":10,"first_name":"Gertrude","last_name":"Frany","email":"gfrany9@typepad.com","typeIds":[{},{}],"skillsId":[],"hour_rate":"$13.17","daily_capacity":7}]
+[
+    {"id":1,"first_name":"Gerald","last_name":"Pinel","email":"gpinel0@flavors.me","typeIds":[{}],"skillsId":[],"hour_rate":"$18.31","daily_capacity":1},
+    {"id":2,"first_name":"Brina","last_name":"Larkkem","email":"blarkkem1@desdev.cn","typeIds":[{},{}],"skillsId":[],"hour_rate":"$4.69","daily_capacity":8},
+    {"id":3,"first_name":"Alvin","last_name":"Ryland","email":"aryland2@yale.edu","typeIds":[{}],"skillsId":[],"hour_rate":"$33.99","daily_capacity":6},
+    {"id":4,"first_name":"Rogel","last_name":"Summer","email":"regsum2@yale.edu","typeIds":[{}],"skillsId":[],"hour_rate":"$45.99","daily_capacity":5},
+    {"id":5,"first_name":"Linoel","last_name":"McTerry","email":"lmcterry4@statcounter.com","typeIds":[{},{}],"skillsId":[],"hour_rate":"$33.45","daily_capacity":5},
+    {"id":6,"first_name":"Debra","last_name":"Filipowicz","email":"dfilipowicz5@reddit.com","typeIds":[{},{}],"skillsId":[],"hour_rate":"$29.92","daily_capacity":6},
+    {"id":7,"first_name":"Matthus","last_name":"Asbrey","email":"masbrey6@fema.gov","typeIds":[{}],"skillsId":[],"hour_rate":"$16.91","daily_capacity":4},
+    {"id":8,"first_name":"Leonelle","last_name":"Gatman","email":"lgatman7@unicef.org","typeIds":[{},{}],"skillsId":[],"hour_rate":"$45.31","daily_capacity":1},
+    {"id":9,"first_name":"Cristian","last_name":"Bagniuk","email":"cbagniuk8@amazon.co.uk","typeIds":[{},{},{}],"skillsId":[],"hour_rate":"$45.31","daily_capacity":3},
+    {"id":10,"first_name":"Gertrude","last_name":"Frany","email":"gfrany9@typepad.com","typeIds":[{},{}],"skillsId":[],"hour_rate":"$13.17","daily_capacity":7}
+]
