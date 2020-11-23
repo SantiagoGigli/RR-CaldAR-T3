@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.use('/', require('./controllers/boilers-types'))
+app.use('/boilers-types', require('./controllers/boilers-types'))
+//app.use('/', require('./controllers/boilers-types'))
 
 app.get('/', (req, res) => {
   res.send('Hello world!')
