@@ -1,52 +1,48 @@
 const express = require('express');
+const fs = require('fs');
 const router = express.Router();
 const customers = require('../data/Customers.json');
-const fs = require('fs');
 
 //get all customers
 
-    getAllCustomers = () =>{
-        router.get('/customers', (req, res) => {
-            res.json(customers);
-            })
-    }
+getAllCustomers = () =>{
+  router.get('/customers', (req, res) => {
+    res.json(customers);
+  })
+}
+getAllCustomers();
 
-    getAllCustomers();
+//get customers by id
 
-  //get customers by id
+getCustomerById = () => {
+  router.get('/customers/:id', (req,res) => {
+    res.json(customers.filter(customers => customers.id === parseInt(req.params.id)));
+  })
+}
+getCustomerById();
 
-    getCustomerById = () => {
-        router.get('/customers/:id', (req,res) => {
-            res.json(customers.filter(customers => customers.id === parseInt(req.params.id)));
-            })
-    }
+//get customers by name
 
-    getCustomerById();
+getCustomerByAttribute = () => {
+  router.get('/customers/customertype/:customerType', (req,res) => {
+    res.json(customers.filter(customers => customers.customerType.includes(req.params.customerType)));
+  })
+}
+getCustomerByAttribute();
 
-  //get customers by name
+//delete customer by id
 
-
-    getCustomerByAttribute = () => {
-        router.get('/customers/customertype/:customerType', (req,res) => {
-            res.json(customers.filter(customers => customers.customerType.includes(req.params.customerType)));
-            })
-    }
-
-    getCustomerByAttribute();
-
-  //delete customer by id
-  deleteCustomerById = () => {
-    router.get('/customers/delete/:id',(req,res)=>{
-          const remCustomers = customers.filter(customer=> customer.id !== parseInt(req.params.id));
-          fs.writeFile('data/Customers.json',JSON.stringify(remCustomers),err=>{
-              if(err){
-                  console.log(err);
-              }
-          });
-          res.json({msg: 'Customer deleted ', Customers: remCustomers});
+deleteCustomerById = () => {
+  router.get('/customers/delete/:id',(req,res)=>{
+    const remCustomers = customers.filter(customer=> customer.id !== parseInt(req.params.id));
+    fs.writeFile('data/Customers.json',JSON.stringify(remCustomers),err=>{
+      if(err){
+        console.log(err);
       }
-    )}
-  deleteCustomerById();
+    });
+    res.json({msg: 'Customer deleted ', Customers: remCustomers});
+  })
+}
+deleteCustomerById();
 
-
-    module.exports = router;
+module.exports = router;
