@@ -1,4 +1,4 @@
 [{"id":1,"description":"Type A. Combi Boiler. Responsive to tap usage and temperature. No waiting time for hot water and central heating. Compact choice for homes with less space.","stock":10,"fiscal_address":"Olympia WA 98504-4410"},
-    {"id":2,"description":"Type B. System Boiler. Economical running costs. Compact and space-saving design. Constant supply of hot water.","stock":5,"fiscal_address":"Tumwater WA 98501-5414"},
-    {"id":3,"description":"Type C. Conventional Boiler. Responsive to tap usage and temperature. No waiting time for hot water and central heating. Compact choice for homes with less space.","stock":3,"fiscal_address":"7273 Linderson Way SW, Tumwater, WA 98501"},
-    {"id":4,"description":"Type D. Mix Boiler. No need for an expansion cistern. Water delivered directly from the mains. No need for loft space.","stock":2,"fiscal_address":"3401 Rotary Drive, Charlotte, NC 28269"}]
+{"id":2,"description":"Type B. System Boiler. Economical running costs. Compact and space-saving design. Constant supply of hot water.","stock":5,"fiscal_address":"Tumwater WA 98501-5414"},
+{"id":3,"description":"Type C. Conventional Boiler. Responsive to tap usage and temperature. No waiting time for hot water and central heating. Compact choice for homes with less space.","stock":3,"fiscal_address":"7273 Linderson Way SW, Tumwater, WA 98501"},
+{"id":4,"description":"Type D. Mix Boiler. No need for an expansion cistern. Water delivered directly from the mains. No need for loft space.","stock":2,"fiscal_address":"3401 Rotary Drive, Charlotte, NC 28269"}]
