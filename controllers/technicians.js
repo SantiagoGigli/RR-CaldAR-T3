@@ -6,9 +6,9 @@ const app = express();
 // Get all the technicians
 
 app.get('/getTechniciansAll', (req,res)=>{
-	res.json(technicians);
+  res.json(technicians);
 });
-  
+
 // Get technicians by ID
 
 app.get('/getTechnicianById', (req,res) => {
@@ -17,7 +17,7 @@ app.get('/getTechnicianById', (req,res) => {
 
 // Get technicians by attribute (Name)
 
-app.get('/getTechniciansByName', (req,res)=>{
+app.get('/getTechniciansByName', (req,res) => {
   res.json(technicians.filter(tech => tech.first_name.includes(req.query.first_name)));
 });
 
