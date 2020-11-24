@@ -1,8 +1,9 @@
 const express = require('express');
+const controllersTechnicians = require('./controllers/technicians')
 const app = express();
 const port = 3000;
 
-app.use('/', require('./controllers/technicians'));
+app.use('/', controllersTechnicians);
 
 app.get('/', (req, res) => {
   res.send('Hello world!')
