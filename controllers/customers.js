@@ -11,25 +11,41 @@ router.get('/customers', (req, res) => {
 //get customers by id
 router.get('/getCustomersById', (req,res) => {
   const id = req.query.id;
-  const customer = customers.find(customer => customer.id === parseInt(id));
-  res.json(customer);
+  const found = customers.find(customer => customer.id === parseInt(id));
+  if(found) {
+    res.json(customers.filter(customer => customer.id === parseInt(id)));
+  }
+  else {
+    res.status(400).json({msg: 'The customer with id ' + id + ' does not exist'});
+  }
 })
 
 //get customers by name
 router.get('/getCustomersByType', (req,res) => {
   const type = req.query.customerType;
   const ctype = customers.filter(customer => customer.customerType.includes(type));
-  res.json(ctype);
+  if(ctype) {
+    res.json(customers.filter(customer => customer.customerType.includes(type)));
+  }
+  else {
+    res.status(400).json({msg: 'There are no customers with ' + customerType + ' type'});
+  }
 })
 
 //delete customer by id
-router.get('/deleteCustomerById', (req,res) => {
+router.get('/deleteCustomerById', (req, res) => {
   const id = req.query.id;
-  const remCustomers = customers.filter(customer => customer.id !== parseInt(id));
-  fs.writeFile('data/Customers.json', JSON.stringify(remCustomers), err => {
-    if(err){console.log(err)}
-  });
-  res.json({msg: 'Customer deleted ', customers: remCustomers});
-})
+  const found = customers.some(customer => customer.id === parseInt(id));  
+  if(found) {
+    const remCustomers = customers.filter(customer => customer.id !== parseInt(id));
+    fs.writeFile('data/Customers.json', JSON.stringify(remCustomers), err => {
+      if(err) {console.log(err);}
+    });
+    res.json({msg: 'Customer deleted ', boilers: remCustomers});
+  }
+  else {
+    res.status(400).json({msg: 'The customer with id ' + id + ' does not exist'});
+  }
+});
 
 module.exports = router;
