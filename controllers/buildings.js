@@ -15,7 +15,7 @@ router.get('/getByAttribute', (req, res) => {
   abmUtils.getByAttribute(req, res, buildingsData);
 });
 
-router.delete('/deleteById', (req, res) => {
+router.get('/deleteById', (req, res) => {
   abmUtils.deleteById(req, res, buildingsData, '/../data/BULDINGS_MOCK_DATA.json');
 });
 
