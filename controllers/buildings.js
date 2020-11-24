@@ -22,7 +22,7 @@ router.get('/getByAttribute', (req, res) => {
     const buildingAttr = queryKeys.map(key => building[key]);
     if (queryAttr.length === buildingAttr.length && buildingAttr.every((val, index) => val == queryAttr[index])) matchingBuildings.push(building);
   }
-  matchingBuildings.length ? res.json(matchingBuildings) : res.status(400).json({msg: 'There isn\'t any building match with your search'})
+  matchingBuildings.length ? res.json(matchingBuildings) : res.status(400).json({msg: 'There isn\'t any building match with your search'});
 });
 
 router.delete('/deleteById', (req, res) => {
