@@ -1,8 +1,9 @@
 const express = require('express');
+const controllers = require('./controllers/boilers-types');
 const app = express();
 const port = 3000;
 
-app.use('/boilers-types', require('./controllers/boilers-types'));
+app.use('/boilers-types', controllers);
 //app.use('/', require('./controllers/boilers-types'))
 
 app.get('/', (req, res) => {
