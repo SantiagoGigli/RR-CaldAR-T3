@@ -6,7 +6,7 @@ const customers = require('../data/Customers.json');
 //get all customers
 router.get('/customers', (req, res) => {
   res.json(customers);
-})
+});
 
 //get customers by id
 router.get('/getCustomersById', (req,res) => {
@@ -18,7 +18,7 @@ router.get('/getCustomersById', (req,res) => {
   else {
     res.status(400).json({msg: 'The customer with id ' + id + ' does not exist'});
   }
-})
+});
 
 //get customers by name
 router.get('/getCustomersByType', (req,res) => {
@@ -30,7 +30,7 @@ router.get('/getCustomersByType', (req,res) => {
   else {
     res.status(400).json({msg: 'There are no customers with ' + customerType + ' type'});
   }
-})
+});
 
 //delete customer by id
 router.get('/deleteCustomerById', (req, res) => {

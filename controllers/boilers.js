@@ -30,7 +30,7 @@ router.get('/getBoilersByType', (req, res) => {
   else {
     res.status(400).json({msg: 'There are no boilers of the type ' + typeId});
   }
-})
+});
 
 //Get Boiler By Attribute: Maintainace Rate
 router.get('/getBoilersByMaintainaceRate', (req, res) => {
@@ -42,7 +42,7 @@ router.get('/getBoilersByMaintainaceRate', (req, res) => {
   else {
     res.status(400).json({msg: 'There are no boilers with maintainace ' + mRate });
   }
-})
+});
 
 //Delete boiler by Id
 router.get('/deleteBoilerById', (req, res) => {
