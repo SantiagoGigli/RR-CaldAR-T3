@@ -1,7 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const fs = require('fs');
 const buildingsData = require('../data/BULDINGS_MOCK_DATA.json');
+const router = express.Router();
 
 router.get('/getAllBuildings', (req, res) => {
   res.json(buildingsData);
@@ -10,8 +10,8 @@ router.get('/getAllBuildings', (req, res) => {
 router.get('/getById', (req, res) => {
   const requestBuildingId = parseInt(req.query.id);
   const building = buildingsData.find(building => building.id === requestBuildingId);
-  if (building.length) {
-    res.json(building)
+  if (building.id) {
+    res.json(building);
   } else {
     res.status(400).json({msg: `The building with id ${requestBuildingId} doesn't exist`});
   }   
@@ -27,13 +27,13 @@ router.get('/getByAttribute', (req, res) => {
     if (queryAttr.length === buildingAttr.length && buildingAttr.every((val, index) => val == queryAttr[index])) matchingBuildings.push(building);
   }
   if (matchingBuildings.length) {
-    res.json(matchingBuildings)
+    res.json(matchingBuildings);
   } else {
     res.status(400).json({msg: 'There isn\'t any building match with your search'});
   }
 });
 
-router.delete('/deleteById', (req, res) => {
+router.get('/deleteById', (req, res) => {
   const requestBuildingId = parseInt(req.query.id);
   const building = buildingsData.some(building => building.id === requestBuildingId);
   if (building) {

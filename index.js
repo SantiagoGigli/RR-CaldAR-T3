@@ -1,4 +1,5 @@
 const express = require('express');
+const controllerBuildings = require('./controllers/buildings');
 const controllersCustomers = require('./controllers/Customers');
 const controllersBoilers = require('./controllers/boilers');
 const app = express();
@@ -6,8 +7,7 @@ const port = 3000;
 
 app.use('/', controllersCustomers);
 app.use('/', controllersBoilers);
-
-app.use('/api/buildings', require('./controllers/buildings'));
+app.use('/api/buildings', controllerBuildings);
 
 app.get('/', (req, res) => {
   res.send('Hello world!');
