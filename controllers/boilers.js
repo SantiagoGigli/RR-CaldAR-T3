@@ -13,7 +13,7 @@ router.get('/getBoilerById', (req, res) => {
   const id = req.query.id;
   const found = boilers.some(boiler => boiler.id === parseInt(id));
   if (found){
-    res.json(boilers.filter(boiler => boiler.id === parseInt(id)));
+    res.json(boilers.find(boiler => boiler.id === parseInt(id)));
   }
   else{
     res.status(400).json({msg: 'The boiler with id ' + id + ' does not exist'});
@@ -44,14 +44,13 @@ router.get('/getBoilersByMaintainaceRate', (req, res) => {
   }
 })
 
-
 //Delete boiler by Id
 router.get('/deleteBoilerById', (req, res) => {
   const id = req.query.id;
   const found = boilers.some(boiler => boiler.id === parseInt(id));  
   if (found){
     const remainingBoilers = boilers.filter(boiler => boiler.id !== parseInt(id));
-    fs.writeFile('data/boilers.json', JSON.stringify(remainingBoilers), err=>{
+    fs.writeFile('data/boilers.json', JSON.stringify(remainingBoilers), err => {
       if(err) console.log(err);      
     });
     res.json({msg: 'Boiler deleted ', boilers: remainingBoilers});
