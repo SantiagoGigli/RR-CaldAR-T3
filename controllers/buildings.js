@@ -24,7 +24,8 @@ router.get('/getByAttribute', (req, res) => {
   for (let i = 0; i < buildingsData.length; i++) {
     const building = buildingsData[i];
     const buildingAttr = queryKeys.map(key => building[key]);
-    if (queryAttr.length === buildingAttr.length && buildingAttr.every((val, index) => val == queryAttr[index])) matchingBuildings.push(building);
+    const areArraysEqual = buildingAttr.every((val, index) => val.toString() === queryAttr[index]);
+    if (queryAttr.length === buildingAttr.length && areArraysEqual) matchingBuildings.push(building);
   }
   if (matchingBuildings.length) {
     res.json(matchingBuildings);
