@@ -24,7 +24,7 @@ router.get('/getByAttribute', (req, res) => {
   for (let i = 0; i < appointmentsData.length; i++) {
     const entity = appointmentsData[i];
     const entityAttrs = queryKeys.map(key => entity[key]);
-    const areArraysEqual = entityAttrs.every((val, index) => val == queryAttr[index])
+    const areArraysEqual = entityAttrs.every((val, index) => val == queryAttr[index]);
     if (queryAttr.length === entityAttrs.length && areArraysEqual) matchingEntities.push(entity);
   }
   if (matchingEntities.length) {
