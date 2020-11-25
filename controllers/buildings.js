@@ -9,8 +9,12 @@ router.get('/getAllBuildings', (req, res) => {
 
 router.get('/getById', (req, res) => {
   const requestBuildingId = parseInt(req.query.id);
-  const building = buildingsData.filter(building => building.id === requestBuildingId);
-  building.length ? res.json(building) : res.status(400).json({msg: `The building with id ${requestBuildingId} doesn't exist`});
+  const building = buildingsData.find(building => building.id === requestBuildingId);
+  if (building.length) {
+    res.json(building)
+  } else {
+    res.status(400).json({msg: `The building with id ${requestBuildingId} doesn't exist`});
+  }   
 });
 
 router.get('/getByAttribute', (req, res) => {
@@ -22,7 +26,11 @@ router.get('/getByAttribute', (req, res) => {
     const buildingAttr = queryKeys.map(key => building[key]);
     if (queryAttr.length === buildingAttr.length && buildingAttr.every((val, index) => val == queryAttr[index])) matchingBuildings.push(building);
   }
-  matchingBuildings.length ? res.json(matchingBuildings) : res.status(400).json({msg: 'There isn\'t any building match with your search'});
+  if (matchingBuildings.length) {
+    res.json(matchingBuildings)
+  } else {
+    res.status(400).json({msg: 'There isn\'t any building match with your search'});
+  }
 });
 
 router.delete('/deleteById', (req, res) => {
