@@ -13,9 +13,9 @@ router.get('/getBoilerById', (req, res) => {
   const id = req.query.id;
   const found = boilers.some(boiler => boiler.id === parseInt(id));
   if (found){
-    res.json(boilers.find(boiler => boiler.id === parseInt(id)));
+    res.json(boilers.find(boiler => boiler.id === parseInt(id))); 
   }
-  else{
+  else {
     res.status(400).json({msg: 'The boiler with id ' + id + ' does not exist'});
   }
 });
@@ -24,22 +24,22 @@ router.get('/getBoilerById', (req, res) => {
 router.get('/getBoilersByType', (req, res) => {
   const type = req.query.type;
   const boilersFound = boilers.some(boiler => boiler.typeId === parseInt(type));
-  if(boilersFound){
+  if(boilersFound) {
     res.json(boilers.filter(boiler => boiler.typeId === parseInt(type)));
   }
-  else{
+  else {
     res.status(400).json({msg: 'There are no boilers of the type ' + typeId});
   }
-})
+});
 
 //Get Boiler By Attribute: Maintainace Rate
 router.get('/getBoilersByMaintainaceRate', (req, res) => {
   const mRate = req.query.mRate;
   const boilersFound = boilers.some(boiler => boiler.maintainace_rate === mRate);
-  if(boilersFound){
+  if(boilersFound) {
     res.json(boilers.filter(boiler => boiler.maintainace_rate === mRate));
   }
-  else{
+  else {
     res.status(400).json({msg: 'There are no boilers with maintainace ' + mRate });
   }
 })
@@ -48,16 +48,16 @@ router.get('/getBoilersByMaintainaceRate', (req, res) => {
 router.get('/deleteBoilerById', (req, res) => {
   const id = req.query.id;
   const found = boilers.some(boiler => boiler.id === parseInt(id));  
-  if (found){
+  if(found) {
     const remainingBoilers = boilers.filter(boiler => boiler.id !== parseInt(id));
     fs.writeFile('data/boilers.json', JSON.stringify(remainingBoilers), err => {
-      if(err) console.log(err);      
+      if(err) {console.log(err);}
     });
     res.json({msg: 'Boiler deleted ', boilers: remainingBoilers});
   }
-  else{
+  else {
     res.status(400).json({msg: 'The boiler with id ' + id + ' does not exist'});
   }
 });
 
-module.exports=router;
+module.exports = router;
