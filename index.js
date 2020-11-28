@@ -1,23 +1,32 @@
 const express = require('express');
-const controllerBoilersTypes = require('./controllers/boilersTypes');
-const controllerAppointments = require('./controllers/appointments');
-const controllerBuildings = require('./controllers/buildings');
-const controllerCustomers = require('./controllers/Customers');
-const controllerBoilers = require('./controllers/boilers');
-const controllerTechnicians = require('./controllers/technicians');
 const app = express();
+const bodyParser = require('body-parser');
 const port = 3000;
+const dotenv = require('dotenv').config();
+const db = require('./models');
+const router = require('./routes');
 
-app.use('/boilerTypes', controllerBoilersTypes);
-app.use('/customers', controllerCustomers);
-app.use('/boilers', controllerBoilers);
-app.use('/buildings', controllerBuildings);
-app.use('/appointments', controllerAppointments);
-app.use('/technicians', controllerTechnicians);
+app.use(bodyParser.json());
+
+//Connect to the server
+db.mongoose
+  .connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(()=> {
+    console.log("Connected to the database");
+  })
+  .catch(err => {
+    console.log("Cannot connect to the database", err);
+    process.exit();
+  })
 
 app.get('/', (req, res) => {
   res.send('Hello world!');
 });
+
+app.use(router);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
