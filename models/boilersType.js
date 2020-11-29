@@ -1,5 +1,3 @@
-const { Mongoose } = require("mongoose");
-
 // USE THE CODE BELOW AS EXAMPLE
 module.exports = mongoose => {
     const boilersType = mongoose.model(
@@ -13,5 +11,5 @@ module.exports = mongoose => {
             { timestamps: true} 
         )
     )
-    return boilersType
+    return boilersType;
 };
