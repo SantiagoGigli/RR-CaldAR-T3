@@ -30,7 +30,6 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   Technician.find({})
     .then(data => {
-      console.log(data);
       res.send(data);
     })
     .catch(err => {
@@ -47,8 +46,8 @@ exports.findOne = (req, res) => {
       if(!data) {
         return res.status(404).send({
           message: `Technician with id ${req.params.id} was not found`
-        })
-      }
+        });
+      };
       res.send(data);
     })
     .catch(err => {
@@ -66,9 +65,8 @@ exports.findName = (req, res) => {
       if(!data) {
         return res.status(404).send({
           message: `Technician with name ${name} was not found`
-        })
-      }
-      console.log(name);
+        });
+      };
       res.send(data);
     })
     .catch(err => {
@@ -99,7 +97,7 @@ exports.update = (req, res) => {
   if(!req.body.name || !req.body.id || !req.body.email || !req.body.hourRate || !req.body.typeBoilers || !req.body.dailyCapacity) {
     res.status(400).send({ message: "Content can not be empty!"});
     return;
-  }
+  };
   const id = req.params.id;
   Technician.findOneAndUpdate({id}, req.body, {useFindAndModify: false})
     .then(data => {
