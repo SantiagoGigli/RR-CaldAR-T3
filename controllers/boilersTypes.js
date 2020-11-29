@@ -81,4 +81,15 @@ exports.delete = (req, res) => {
   });
 }
 
-
+// Get all boilers type
+exports.findAll = (req, res) => {
+  boilersType.find({})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Something happend, couldn't retrieve boilers types"
+    });
+  });
+}
