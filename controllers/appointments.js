@@ -1,51 +1,120 @@
-const express = require('express');
-const fs = require('fs');
-const appointmentsData = require('../data/appointments.json');
-const router = express.Router();
+const db = require('../models');
+const appointments = db.appointments;
 
-router.get('/getAllAppointments', (req, res) => {
-  res.json(appointmentsData);
-});
-
-router.get('/getAppointmentById', (req, res) => {
-    const requestEntityId = parseInt(req.query.id);
-    const entity = appointmentsData.find(ent => ent.id === requestEntityId);
-    if (entity){
-      res.json(entity);
-    } else{
-      res.status(400).json({msg: `The entity with id ${requestEntityId} doesn't exist`});
-    }
-});
-
-router.get('/getAppointmentsByAttribute', (req, res) => {
-  const queryKeys = Object.keys(req.query);
-  const queryAttr = queryKeys.map(key => req.query[key]);
-  const matchingEntities = [];
-  for (let i = 0; i < appointmentsData.length; i++) {
-    const entity = appointmentsData[i];
-    const entityAttrs = queryKeys.map(key => entity[key]);
-    const areArraysEqual = entityAttrs.every((val, index) => val == queryAttr[index]);
-    if (queryAttr.length === entityAttrs.length && areArraysEqual) matchingEntities.push(entity);
+// Create new appointment
+// Validate
+exports.create = (req, res) => {
+  if (!req.body.id || !req.body.idBuilding || !req.body.idBoiler || !req.body.date || !req.body.startTime || !req.body.endTime || !req.body.idTechnician || !req.body.type){
+    res.status(400).send({msg: "Content can't be empty"});
+    return;
   }
-  if (matchingEntities.length){
-    res.json(matchingEntities);
-  } else{
-    res.status(400).json({msg: `No results`});
-  }
-});
 
-router.get('/deleteAppointmentById', (req, res) => {
-  const requestEntityId = parseInt(req.query.id);
-  const entity = appointmentsData.some(ent => ent.id === requestEntityId);
-  if (entity){
-    const newData = appointmentsData.filter(ent => ent.id !== requestEntityId);
-    fs.writeFile(__dirname + '/../data/appointments.json', JSON.stringify(newData), err => {
-      if (err) console.log(err);
+  // Create
+  const newAppointments = new appointments({
+    id: req.body.id,
+    idBuilding: req.body.idBuilding,
+    idBoiler: req.body.idBoiler,
+    date: req.body.date,
+    startTime: req.body.startTime,
+    endTime: req.body.endTime,
+    idTechnician: req.body.idTechnician,
+    type: req.body.type
+  });
+
+  // Save
+  newAppointments
+    .save(newAppointments)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error ocurred while creating the new boiler type"
+      });
     });
-    res.json({msg: 'Entity deleted', result: newData});
-  } else{
-    res.status(400).json({msg: `The entity with id ${requestEntityId} doesn't exist`});
-  }
-});
+}
 
-module.exports = router;
+// Update boiler type
+exports.update = (req, res) => {
+  if (!req.body){
+    return res.status(400).send({
+      message: "Data body can't be empty!"
+    });
+  }
+
+  // Validate request
+  if (!req.body.id || !req.body.idBuilding || !req.body.idBoiler || !req.body.date || !req.body.startTime || !req.body.endTime || !req.body.idTechnician || !req.body.type){
+    res.status(400).send({
+      message: "Content can't be empty"
+    });
+   return;
+  }
+
+  const id = req.params.id;
+  
+  appointments.findOneAndUpdate({id}, req.body, {useFindAndModify: false})
+    .then(data => {
+      if (!data){
+        res.status(400).send({
+          message: `Can't update the appointment with id ${id}. Appointment was not found` 
+        });
+      } else{
+        res.send({message: "Appointment type was update successfuly"});
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: `Error updating the Appointments with id ${id}`
+      });
+    });
+}
+/*  
+// Delete boiler type
+exports.delete = (req, res) => {
+  const id = req.params.id;
+  boilersType.findOneAndRemove({id}, {useFindAndModify: false})
+  .then(data => 
+    res.send({
+      message: "Bolier type was removed successfuly"
+    })
+  )
+  .catch(err => {
+    res.status(500).send({
+      message: `Error removing building type ${id}`
+    });
+  });
+}
+
+// Get all boilers type
+exports.findAll = (req, res) => {
+  boilersType.find({})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Something happend, couldn't retrieve boilers type"
+    });
+  });
+}
+
+// Get boiler type by id
+exports.findOne = (req, res) => {
+  boilersType.findOne({ id: req.params.id})
+  .then(data => {
+    if(!data){
+      return res.status(404).send({
+        message: `Couldn't find boiler type witd id ${id}`
+      })
+    }
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Something happend, couldn't retrieve boilers type"
+    });
+  });
+}
+
+*/

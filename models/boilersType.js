@@ -1,4 +1,3 @@
-// USE THE CODE BELOW AS EXAMPLE
 module.exports = mongoose => {
     const boilersType = mongoose.model(
         "boilersType",
