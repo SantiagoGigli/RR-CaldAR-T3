@@ -9,7 +9,7 @@ router.get('/getAllCustomers', (req, res) => {
 });
 
 //get customers by id
-router.get('/getCustomersById', (req, res) => {
+router.get('/getCu  stomersById', (req, res) => {
   const id = req.query.id;
   const found = customers.find(customer => customer.id === parseInt(id));
   if(found){

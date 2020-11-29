@@ -1,6 +1,6 @@
-const techniciansRouter = require('./technicians');
+const boilersTypeRouter = require('./boilersType');
 const router = require('express').Router();
 
-router.use('/technicians', techniciansRouter);
+router.use('/boilersType', boilersTypeRouter);
 
 module.exports = router;
