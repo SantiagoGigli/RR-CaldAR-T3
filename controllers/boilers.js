@@ -1,7 +1,6 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
 const db = require('../models');
-const router = express.Router();
 
 const add = async(req, res) => {
   const requieredParams = ['typeId', 'maintainaceRate', 'hourMaintainaceCost', 'hourEventualCost', 'idBuilding'];
@@ -36,4 +35,12 @@ const getById = async(req, res) => {
   }
 }
 
-module.exports = {add, getById};
+const getAllBoilers = async(req, res) => {
+  try{
+    res.json(await db.Boiler.find());
+  } catch(e){
+    res.status(500).json({msg: 'Unable to get boilers'});
+  }
+}
+
+module.exports = {add, getById, getAllBoilers};
