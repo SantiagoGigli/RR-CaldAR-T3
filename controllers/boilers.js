@@ -1,4 +1,5 @@
 const express = require('express');
+const { ObjectId } = require('mongodb');
 const db = require('../models');
 const router = express.Router();
 
@@ -17,13 +18,22 @@ const add = async(req, res) => {
     hourEventualCost: requestBody.hourEventualCost,
     idBuilding: requestBody.idBuilding
   }
-  const boiler = new db.Boiler(newBoilerJson);
   try{
-    await boiler.save(boiler);
+    const boiler = new db.Boiler(newBoilerJson);
+    await boiler.save();
     res.json({msg:'Boiler added', boiler});
   } catch(e){
     res.status(400).json({msg:'Unable to add boiler'});
   }
+};
+
+const getById = async(req, res) => {
+  try{
+    const boiler = await db.Boiler.findOne({_id: ObjectId(req.query.id)});
+    res.json(boiler);
+  } catch(e){
+    res.status(400).json({msg: `Unable to find boiler with id: ${req.query.id}`});
+  }
 }
 
-module.exports = {add, findById};
+module.exports = {add, getById};

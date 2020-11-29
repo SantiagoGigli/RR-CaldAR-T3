@@ -4,8 +4,7 @@ const router = require('express').Router();
 
 router.post('/add', boilers.add);
 
-// // Update a technician
-// router.get('/updateById/:id', technicians.update);
+router.get('/getById', boilers.getById);
 
 // // Delete a technician by ID
 // router.get('/deleteById/:id', technicians.delete);
