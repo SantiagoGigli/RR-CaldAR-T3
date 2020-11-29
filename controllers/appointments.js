@@ -69,52 +69,50 @@ exports.update = (req, res) => {
       });
     });
 }
-/*  
+
 // Delete boiler type
 exports.delete = (req, res) => {
   const id = req.params.id;
-  boilersType.findOneAndRemove({id}, {useFindAndModify: false})
+  appointments.findOneAndRemove({id}, {useFindAndModify: false})
   .then(data => 
     res.send({
-      message: "Bolier type was removed successfuly"
+      message: "Appointment was removed successfuly"
     })
   )
   .catch(err => {
     res.status(500).send({
-      message: `Error removing building type ${id}`
+      message: `Error removing appointment ${id}`
     });
   });
 }
 
 // Get all boilers type
 exports.findAll = (req, res) => {
-  boilersType.find({})
+  appointments.find({})
   .then(data => {
     res.send(data);
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve boilers type"
+      message: "Something happend, couldn't retrieve appointments type"
     });
   });
 }
 
 // Get boiler type by id
 exports.findOne = (req, res) => {
-  boilersType.findOne({ id: req.params.id})
+  appointments.findOne({ id: req.params.id})
   .then(data => {
     if(!data){
       return res.status(404).send({
-        message: `Couldn't find boiler type witd id ${id}`
+        message: `Couldn't find appointment type witd id ${id}`
       })
     }
     res.send(data);
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve boilers type"
+      message: "Something happend, couldn't retrieve appointment type"
     });
   });
 }
-
-*/
