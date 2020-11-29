@@ -89,7 +89,25 @@ exports.findAll = (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve boilers types"
+      message: "Something happend, couldn't retrieve boilers type"
+    });
+  });
+}
+
+// Get boiler type by id
+exports.findOne = (req, res) => {
+  boilersType.findOne({ id: req.params.id})
+  .then(data => {
+    if(!data){
+      return res.status(404).send({
+        message: `Couldn't find boiler type witd id ${id}`
+      })
+    }
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Something happend, couldn't retrieve boilers type"
     });
   });
 }

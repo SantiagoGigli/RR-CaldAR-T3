@@ -14,7 +14,7 @@ router.delete('/:id', boilersType.delete);
 // Get all the boiler type
 router.get('/', boilersType.findAll);
 
-// // Get boiler type by ID
-// router.get('/:id', boilersType.findOne);
+// Get boiler type by ID
+router.get('/:id', boilersType.findOne);
 
 module.exports = router;
