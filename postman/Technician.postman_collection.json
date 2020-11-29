@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "a5878c26-3a82-49f1-8133-39a1dad383cb",
+		"name": "CaldAR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Technicians",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"typeBoilers\": [\r\n        2,\r\n        2\r\n    ],\r\n    \"_id\": \"5fc3d3070c0916276cd9d3bc\",\r\n    \"id\": 55,\r\n    \"name\": \"Gabriel\",\r\n    \"email\": \"gabi@zimbio.com\",\r\n    \"hourRate\": 11,\r\n    \"dailyCapacity\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/technicians",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"technicians"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Technicians by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"typeBoilers\": [\r\n        2,\r\n        2\r\n    ],\r\n    \"_id\": \"5fc3d3070c0916276cd9d3bc\",\r\n    \"id\": 55,\r\n    \"name\": \"Gabriel\",\r\n    \"email\": \"gabi@zimbio.com\",\r\n    \"hourRate\": 11,\r\n    \"dailyCapacity\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/technicians/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"technicians",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Technicians by Name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"typeBoilers\": [\r\n        2,\r\n        2\r\n    ],\r\n    \"_id\": \"5fc3d3070c0916276cd9d3bc\",\r\n    \"id\": 55,\r\n    \"name\": \"Gabriel\",\r\n    \"email\": \"gabi@zimbio.com\",\r\n    \"hourRate\": 11,\r\n    \"dailyCapacity\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/technicians/name/Gabriel",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"technicians",
+						"name",
+						"Gabriel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new Technician",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"typeBoilers\": [\r\n        2,\r\n        2\r\n    ],\r\n    \"_id\": \"5fc3d3070c0916276cd9d3bc\",\r\n    \"id\": 55,\r\n    \"name\": \"Gabriel\",\r\n    \"email\": \"gabi@zimbio.com\",\r\n    \"hourRate\": 11,\r\n    \"dailyCapacity\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/technicians",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"technicians"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Technician",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"typeBoilers\": [\r\n        2,\r\n        2\r\n    ],\r\n    \"_id\": \"5fc3d3070c0916276cd9d3bc\",\r\n    \"id\": 55,\r\n    \"name\": \"Gabriel\",\r\n    \"email\": \"gabi@zimbio.com\",\r\n    \"hourRate\": 11,\r\n    \"dailyCapacity\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/technicians",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"technicians"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Technician",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"typeBoilers\": [\r\n        2,\r\n        2\r\n    ],\r\n    \"_id\": \"5fc3d3070c0916276cd9d3bc\",\r\n    \"id\": 55,\r\n    \"name\": \"Gabriel\",\r\n    \"email\": \"gabi@zimbio.com\",\r\n    \"hourRate\": 11,\r\n    \"dailyCapacity\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/technicians/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"technicians",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
