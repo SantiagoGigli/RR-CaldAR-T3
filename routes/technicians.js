@@ -1,20 +1,11 @@
 const technicians = require('../controllers/technicians.js');
 const router = require('express').Router();
 
-
-// // Add a new technician
-// router.get('/add', technicians.findAll);
-
-// // Update a technician
-// router.get('/updateById/:id', technicians.update);
-
-// // Delete a technician by ID
-// router.get('/deleteById/:id', technicians.delete);
-
-// // Get all the technicians
-// router.get('/deleteById', technicians.findAll);
-
-// // Get technician by ID
-// router.get('/deleteById/:id', technicians.findOne);
+router.get('/', technicians.findAll);
+router.get('/:id', technicians.findOne);
+router.get('/name/:name', technicians.findName);
+router.post('/', technicians.create);
+router.put('/:id', technicians.update);
+router.delete('/:id', technicians.delete);
 
 module.exports = router;
