@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 
 // Add a new appointments
-router.post('/addNewappointments', appointments.create);
+router.post('/addNew', appointments.create);
 
 // Update a appointments type
 router.put('/updateById/:id', appointments.update);

@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 
 // Add a new boiler type
-router.post('/addNewBoilerType', boilersType.create);
+router.post('/addNew', boilersType.create);
 
 // Update a boiler type
 router.put('/updateById/:id', boilersType.update);

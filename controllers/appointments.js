@@ -101,7 +101,7 @@ exports.findAll = (req, res) => {
 
 // Get appointment by id
 exports.findOne = (req, res) => {
-  appointments.findOne({ id: req.params.id})
+  appointments.findOne({id: req.params.id})
   .then(data => {
     if(!data){
       return res.status(404).send({
@@ -119,7 +119,7 @@ exports.findOne = (req, res) => {
 
 // Get appointment type Monthly by id
 exports.findType = (req, res) => {
-  appointments.find({ type: req.params.type})
+  appointments.find({type: req.params.type})
   .then(data => {
     if(!data){
       return res.status(404).send({
