@@ -17,4 +17,7 @@ router.get('/getAll', boilersType.findAll);
 // Get boiler type by ID
 router.get('/getById/:id', boilersType.findOne);
 
+// Get boiler type by description
+router.get('/getByDescription/:description', boilersType.findDescription);
+
 module.exports = router;

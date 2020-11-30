@@ -28,7 +28,7 @@ exports.create = (req, res) => {
           err.message || "Some error ocurred while creating the new boiler type"
       });
     });
-}
+};
 
 // Update boiler type
 exports.update = (req, res) => {
@@ -63,7 +63,7 @@ exports.update = (req, res) => {
         message: `Error updating boiler type with id ${id}`
       });
     });
-}
+};
   
 // Delete boiler type
 exports.delete = (req, res) => {
@@ -79,7 +79,7 @@ exports.delete = (req, res) => {
       message: `Error removing building type ${id}`
     });
   });
-}
+};
 
 // Get all boilers type
 exports.findAll = (req, res) => {
@@ -92,7 +92,7 @@ exports.findAll = (req, res) => {
       message: "Something happend, couldn't retrieve boilers type"
     });
   });
-}
+};
 
 // Get boiler type by id
 exports.findOne = (req, res) => {
@@ -110,4 +110,22 @@ exports.findOne = (req, res) => {
       message: "Something happend, couldn't retrieve boilers type"
     });
   });
-}
+};
+
+// Get boiler type by description
+exports.findDescription = (req, res) => {
+  boilersType.find({description: req.params.description})
+  .then(data => {
+    if(!data){
+      return res.status(404).send({
+        message: `Couldn't find boiler type description ${description}`
+      })
+    }
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Something happend, couldn't retrieve boilers type"
+    });
+  });
+};
