@@ -1,50 +1,37 @@
-const express = require('express');
-const fs = require('fs');
-const customers = require('../data/customers.json');
-const router = express.Router();
+const db = require('../models');
+const customers = db.customers;
 
-//get all customers
-router.get('/getAllCustomers', (req, res) => {
-  res.json(customers);
-});
-
-//get customers by id
-router.get('/getCustomersById', (req, res) => {
-  const id = req.query.id;
-  const found = customers.find(customer => customer.id === parseInt(id));
-  if(found){
-    res.json(customers.filter(customer => customer.id === parseInt(id)));
-  }
-  else{
-    res.status(400).json({msg: 'The customer with id ' + id + ' does not exist'});
-  }
-});
-
-//get customers by name
-router.get('/getCustomersByType', (req, res) => {
-  const type = req.query.customerType;
-  const ctype = customers.filter(customer => customer.customerType.includes(type));
-  if(ctype){
-    res.json(customers.filter(customer => customer.customerType.includes(type)));
-  }
-  else {
-    res.status(400).json({msg: 'There are no customers with ' + customerType + ' type'});
-  }
-});
-
-//delete customer by id
-router.get('/deleteCustomerById', (req, res) => {
-  const id = req.query.id;
-  const found = customers.some(customer => customer.id === parseInt(id));  
-  if(found){
-    const remCustomers = customers.filter(customer => customer.id !== parseInt(id));
-    fs.writeFile('data/customers.json', JSON.stringify(remCustomers), err => {
-      if(err) console.log(err);
+// Add a new customer
+//POST http://localhost:3000/customers
+exports.create = (req, res) => {
+  //Validate
+  if (!req.body.id || !req.body.type || !req.body.address){
+    res.status(400).send({
+      message: "Customer Creation needs ID, TYPE and ADDRESS"
     });
-    res.json({msg: 'Customer deleted ', boilers: remCustomers});
-  } else{
-    res.status(400).json({msg: 'The customer with id ' + id + ' does not exist'});
-  }
-});
+    return;
+  };
+  
+  //Create
+  const customer = new customers ({
+    id: req.body.id,
+    type: req.body.type,
+    address: req.body.address,
+    email: req.body.email,
+    buildings: req.body.buildings
+  });
 
-module.exports = router;
+  //Save
+  customer
+    .save(customer)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message  || "Customer Creation Error"
+      });
+    });
+};
+
