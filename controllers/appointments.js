@@ -33,7 +33,7 @@ exports.create = (req, res) => {
           err.message || "Some error ocurred while creating the new boiler type"
       });
     });
-}
+};
 
 // Update appointment
 exports.update = (req, res) => {
@@ -68,7 +68,7 @@ exports.update = (req, res) => {
         message: `Error updating the Appointments with id ${id}`
       });
     });
-}
+};
 
 // Delete appointment by id
 exports.delete = (req, res) => {
@@ -84,7 +84,7 @@ exports.delete = (req, res) => {
       message: `Error removing appointment ${id}`
     });
   });
-}
+};
 
 // Get all appointments type
 exports.findAll = (req, res) => {
@@ -97,7 +97,7 @@ exports.findAll = (req, res) => {
       message: "Something happend, couldn't retrieve appointments type"
     });
   });
-}
+};
 
 // Get appointment by id
 exports.findOne = (req, res) => {
@@ -115,7 +115,7 @@ exports.findOne = (req, res) => {
       message: "Something happend, couldn't retrieve appointment type"
     });
   });
-}
+};
 
 // Get appointment type Monthly by id
 exports.findType = (req, res) => {
@@ -133,5 +133,4 @@ exports.findType = (req, res) => {
       message: "Something happend, couldn't retrieve type"
     });
   });
-}
-
+};
