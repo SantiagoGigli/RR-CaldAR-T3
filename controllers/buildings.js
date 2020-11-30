@@ -1,3 +1,5 @@
+const { parse } = require('dotenv/types');
+const { Int32 } = require('mongodb');
 const db = require('../models');
 const buildings = db.buildings;
 
@@ -102,7 +104,6 @@ exports.findAll = (req, res) => {
     });
 };
 
-
 //Retrieve One
 //GET http://localhost:3000/buildings/1
 exports.findOne = (req, res) => {
@@ -122,3 +123,35 @@ exports.findOne = (req, res) => {
       });
     });
 };  
+
+//Retrieve All By Name
+//GET http://localhost:3000/buildings/getAllByName?name=Empire 2
+exports.findAllByName = (req, res) => {
+  const namePar = req.query.name; 
+  buildings.find({name: namePar})
+    .then(data => {
+      res.send(data);  
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message  || "Building Find All By Name Error."
+      });
+    });
+};
+
+//Retrieve All By Boiler ID
+//GET http://localhost:3000/buildings/getAllByBoilerId/1
+exports.getAllByBoilerId = (req, res) => {
+  console.log(req.params.id);
+  buildings.find({boilers: parseInt(req.params.id)})
+    .then(data => {
+      res.send(data);  
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message  || "Building Find All By Boiler ID Error."
+      });
+    });
+};
