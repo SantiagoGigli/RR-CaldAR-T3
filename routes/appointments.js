@@ -17,7 +17,7 @@ router.get('/getAll', appointments.findAll);
 // Get appointments by ID
 router.get('/getById/:id', appointments.findOne);
 
-// Get appointments monthly by ID
+// Get appointments by type (Monthly / Eventual)
 router.get('/getByType/:type', appointments.findType);
 
 module.exports = router;
