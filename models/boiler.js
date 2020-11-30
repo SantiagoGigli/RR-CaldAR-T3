@@ -8,7 +8,7 @@ module.exports = mongoose => {
             {
                 id: Number,
                 typeId: String,
-                maintainaceRate: String,
+                maintainanceRate: String,
                 hourMaintainaceCost: Number,
                 hourEventualCost: Number,
                 idBuilding: Number

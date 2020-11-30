@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 const db = require('../models');
 
 const add = async(req, res) => {
-  const requieredParams = ['typeId', 'maintainaceRate', 'hourMaintainaceCost', 'hourEventualCost', 'idBuilding'];
+  const requieredParams = ['typeId', 'maintainanceRate', 'hourMaintainanceCost', 'hourEventualCost', 'idBuilding'];
   const requestBody = req.body;
   const requestParams = Object.keys(requestBody);
   const isRequestComplete = requieredParams.every(key => requestParams.includes(key));
@@ -12,8 +12,8 @@ const add = async(req, res) => {
   }
   const newBoilerJson = {
     typeId: requestBody.typeId,
-    maintainaceRate: requestBody.maintainaceRate,
-    hourMaintainaceCost: requestBody.hourMaintainaceCost,
+    maintainanceRate: requestBody.maintainanceRate,
+    hourMaintainanceCost: requestBody.hourMaintainanceCost,
     hourEventualCost: requestBody.hourEventualCost,
     idBuilding: requestBody.idBuilding
   }
