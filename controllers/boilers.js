@@ -15,7 +15,7 @@ const add = async(req, res) => {
     hourMaintainanceCost: requestBody.hourMaintainanceCost,
     hourEventualCost: requestBody.hourEventualCost,
     idBuilding: requestBody.idBuilding
-  }
+  };
   try{
     const boiler = new db.Boiler(newBoilerJson);
     await boiler.save();
@@ -27,7 +27,7 @@ const add = async(req, res) => {
 
 const getById = async(req, res) => {
   try{
-    const boiler = await db.Boiler.findOne({_id: ObjectId(req.query.id)});
+    const boiler = await db.Boiler.findOne({_id: ObjectId(req.params.id)});
     res.json(boiler);
   } catch(e){
     res.status(400).json({msg: `Unable to find boiler with id: ${req.query.id}`});
@@ -83,7 +83,7 @@ const updateBoiler = async(req, res) => {
 
 const deleteBoiler = async(req, res) => {
   try{
-    await db.Boiler.deleteOne({_id: ObjectId(req.query.id)});
+    await db.Boiler.deleteOne({_id: ObjectId(req.params.id)});
     res.json({msg: 'Deleted'});
   } catch(e){
     res.status(400).json({msg: 'Failed to delete'});
