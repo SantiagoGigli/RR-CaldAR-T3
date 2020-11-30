@@ -35,7 +35,7 @@ exports.create = (req, res) => {
     });
 }
 
-// Update boiler type
+// Update appointment
 exports.update = (req, res) => {
   if (!req.body){
     return res.status(400).send({
@@ -70,7 +70,7 @@ exports.update = (req, res) => {
     });
 }
 
-// Delete boiler type
+// Delete appointment by id
 exports.delete = (req, res) => {
   const id = req.params.id;
   appointments.findOneAndRemove({id}, {useFindAndModify: false})
@@ -86,7 +86,7 @@ exports.delete = (req, res) => {
   });
 }
 
-// Get all boilers type
+// Get all appointments type
 exports.findAll = (req, res) => {
   appointments.find({})
   .then(data => {
@@ -99,7 +99,7 @@ exports.findAll = (req, res) => {
   });
 }
 
-// Get boiler type by id
+// Get appointment by id
 exports.findOne = (req, res) => {
   appointments.findOne({ id: req.params.id})
   .then(data => {
@@ -116,3 +116,22 @@ exports.findOne = (req, res) => {
     });
   });
 }
+
+// Get appointment type Monthly by id
+exports.findType = (req, res) => {
+  appointments.find({ type: req.params.type})
+  .then(data => {
+    if(!data){
+      return res.status(404).send({
+        message: `Couldn't find type ${type}`
+      })
+    }
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Something happend, couldn't retrieve type"
+    });
+  });
+}
+

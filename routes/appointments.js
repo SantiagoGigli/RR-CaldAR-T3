@@ -14,7 +14,10 @@ router.delete('/deleteById/:id', appointments.delete);
 // Get all the appointments type
 router.get('/getAll', appointments.findAll);
 
-// Get appointments type by ID
+// Get appointments by ID
 router.get('/getById/:id', appointments.findOne);
+
+// Get appointments monthly by ID
+router.get('/getByType/:type', appointments.findType);
 
 module.exports = router;

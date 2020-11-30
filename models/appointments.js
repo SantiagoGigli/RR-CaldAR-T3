@@ -6,7 +6,7 @@ module.exports = mongoose => {
                 id: Number,
                 idBuilding: Number,
                 idBoiler: Number,
-                date: Number,
+                date: Date,
                 startTime: Number,
                 endTime: Number,
                 idTechnician: Number,
