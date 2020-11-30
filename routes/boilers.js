@@ -15,13 +15,6 @@ router.get('/getByBoilerBulding', boilers.getByBoilerBulding);
 
 router.put('/update', boilers.updateBoiler);
 
-// // Delete a technician by ID
-// router.get('/deleteById/:id', technicians.delete);
-
-// // Get all the technicians
-// router.get('/deleteById', technicians.findAll);
-
-// // Get technician by ID
-// router.get('/deleteById/:id', technicians.findOne);
+router.delete('/delete', boilers.deleteBoiler);
 
 module.exports = router;

@@ -81,4 +81,13 @@ const updateBoiler = async(req, res) => {
   }
 };
 
-module.exports = {add, getById, getAllBoilers, getByBoilerType, getByBoilerMaintainanceRate, getByBoilerBulding, updateBoiler};
+const deleteBoiler = async(req, res) => {
+  try{
+    await db.Boiler.deleteOne({_id: ObjectId(req.query.id)});
+    res.json({msg: 'Deleted'});
+  } catch(e){
+    res.status(400).json({msg: 'Failed to delete'});
+  }
+};
+
+module.exports = {add, getById, getAllBoilers, getByBoilerType, getByBoilerMaintainanceRate, getByBoilerBulding, updateBoiler, deleteBoiler};
