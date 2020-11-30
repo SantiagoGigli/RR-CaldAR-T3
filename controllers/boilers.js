@@ -1,4 +1,3 @@
-const express = require('express');
 const { ObjectId } = require('mongodb');
 const db = require('../models');
 
@@ -33,7 +32,7 @@ const getById = async(req, res) => {
   } catch(e){
     res.status(400).json({msg: `Unable to find boiler with id: ${req.query.id}`});
   }
-}
+};
 
 const getAllBoilers = async(req, res) => {
   try{
@@ -49,7 +48,7 @@ const getByBoilerType = async(req, res) => {
   } catch(e){
     res.status(400).json({msg: 'Unable to get by boiler type'});
   }
-}
+};
 
 const getByBoilerMaintainanceRate = async(req, res) => {
   try{
@@ -57,7 +56,7 @@ const getByBoilerMaintainanceRate = async(req, res) => {
   } catch(e){
     res.status(400).json({msg: 'Unable to get by boiler type'});
   }
-}
+};
 
 const getByBoilerBulding = async(req, res) => {
   try{
@@ -65,6 +64,21 @@ const getByBoilerBulding = async(req, res) => {
   } catch(e){
     res.status(400).json({msg: 'Unable to get by boiler type'});
   }
-}
+};
 
-module.exports = {add, getById, getAllBoilers, getByBoilerType, getByBoilerMaintainanceRate, getByBoilerBulding};
+const updateBoiler = async(req, res) => {
+  const body = req.body;
+  try{
+    await db.Boiler.updateOne(
+      {_id: ObjectId(body.id)},
+      {
+        $set: body.update
+      }
+    );
+    res.json({msg: 'record updated!'});
+  } catch(e){
+    res.status(400).json({msg: 'Unable to update'});
+  }
+};
+
+module.exports = {add, getById, getAllBoilers, getByBoilerType, getByBoilerMaintainanceRate, getByBoilerBulding, updateBoiler};

@@ -13,6 +13,8 @@ router.get('/getByBoilerMaintainanceRate', boilers.getByBoilerMaintainanceRate);
 
 router.get('/getByBoilerBulding', boilers.getByBoilerBulding);
 
+router.put('/update', boilers.updateBoiler);
+
 // // Delete a technician by ID
 // router.get('/deleteById/:id', technicians.delete);
 
