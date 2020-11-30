@@ -9,6 +9,10 @@ router.get('/getAllBoilers', boilers.getAllBoilers);
 
 router.get('/getByBoilerType', boilers.getByBoilerType);
 
+router.get('/getByBoilerMaintainanceRate', boilers.getByBoilerMaintainanceRate);
+
+router.get('/getByBoilerBulding', boilers.getByBoilerBulding);
+
 // // Delete a technician by ID
 // router.get('/deleteById/:id', technicians.delete);
 

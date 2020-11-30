@@ -51,4 +51,20 @@ const getByBoilerType = async(req, res) => {
   }
 }
 
-module.exports = {add, getById, getAllBoilers, getByBoilerType};
+const getByBoilerMaintainanceRate = async(req, res) => {
+  try{
+    res.json(await db.Boiler.find({maintainanceRate: req.query.maintainanceRate}));
+  } catch(e){
+    res.status(400).json({msg: 'Unable to get by boiler type'});
+  }
+}
+
+const getByBoilerBulding = async(req, res) => {
+  try{
+    res.json(await db.Boiler.find({idBuilding: req.query.idBuilding}));
+  } catch(e){
+    res.status(400).json({msg: 'Unable to get by boiler type'});
+  }
+}
+
+module.exports = {add, getById, getAllBoilers, getByBoilerType, getByBoilerMaintainanceRate, getByBoilerBulding};
