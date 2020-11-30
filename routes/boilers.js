@@ -5,7 +5,9 @@ router.post('/add', boilers.add);
 
 router.get('/getById', boilers.getById);
 
-router.get('/getAllBoilers', boilers.getAllBoilers)
+router.get('/getAllBoilers', boilers.getAllBoilers);
+
+router.get('/getByBoilerType', boilers.getByBoilerType);
 
 // // Delete a technician by ID
 // router.get('/deleteById/:id', technicians.delete);

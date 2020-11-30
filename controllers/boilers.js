@@ -41,6 +41,14 @@ const getAllBoilers = async(req, res) => {
   } catch(e){
     res.status(500).json({msg: 'Unable to get boilers'});
   }
+};
+
+const getByBoilerType = async(req, res) => {
+  try{
+    res.json(await db.Boiler.find({typeId: req.query.typeId}));
+  } catch(e){
+    res.status(400).json({msg: 'Unable to get by boiler type'});
+  }
 }
 
-module.exports = {add, getById, getAllBoilers};
+module.exports = {add, getById, getAllBoilers, getByBoilerType};
