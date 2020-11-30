@@ -8,6 +8,7 @@ router.post('/add', customers.create);
 router.put('/update/:id', customers.update);
 
 // Delete a customer by ID
+router.delete('/delete/:id', customers.delete);
 
 // Get all the customers
 router.get('/getAllCustomers', customers.findAll);

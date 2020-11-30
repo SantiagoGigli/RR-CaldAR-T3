@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 };
 
 //Update
-//PUT http://localhost:3000/customers/update/1
+//PUT http://localhost:3000/customers/update/3
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -70,6 +70,27 @@ exports.update = (req, res) => {
     });
 };  
 
+//Delete Customer
+//DELETE http://localhost:3000/customers/delete/1
+exports.delete = (req, res) => {
+  const id = req.params.id;
+  customers.findOneAndRemove({id}, {useFindAndModify: false})
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message:"Customer ID: "+id+" not found"
+        });
+      }
+      res.send({ message: "Customer "+id+ " removed"});       
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message  || "Customer Delete Error"
+      });
+    });
+};  
+
 //Get All Customers
 //GET http://localhost:3000/customers/getAllCustomers
 exports.findAll = (req, res) => {
@@ -86,7 +107,7 @@ exports.findAll = (req, res) => {
 };
 
 //Get Customer by Id
-//GET
+//GET http://localhost:3000/customers/getCustomerById/3
 exports.findOne = (req, res) => {
   customers.findOne({id: req.params.id})
     .then(data => {
