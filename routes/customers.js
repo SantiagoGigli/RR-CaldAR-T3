@@ -11,9 +11,12 @@ router.put('/update/:id', customers.update);
 router.delete('/delete/:id', customers.delete);
 
 // Get all the customers
-router.get('/getAllCustomers', customers.findAll);
+router.get('/getAll', customers.findAll);
 
 // Get customer by ID
-router.get('/getCustomerById/:id', customers.findOne);
+router.get('/getById/:id', customers.findOne);
+
+//Get customer by Type
+router.get('/getByType/:type', customers.findType);
 
 module.exports = router;

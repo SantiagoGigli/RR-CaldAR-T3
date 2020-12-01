@@ -7,7 +7,7 @@ exports.create = (req, res) => {
   //Validate
   if (!req.body.id || !req.body.type || !req.body.address){
     res.status(400).send({
-      message: "Customer Creation needs ID, TYPE and ADDRESS"
+      message: 'Content cant be empty'
     });
     return;
   };
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Customer Creation Error"
+          err.message  || 'Some error ocurred while creating the new customer'
       });
     });
 };
@@ -38,34 +38,32 @@ exports.create = (req, res) => {
 //Update
 //PUT http://localhost:3000/customers/update/3
 exports.update = (req, res) => {
-  const id = req.params.id;
-
   //Validate
   if (!req.body){
     return res.status(400).send({
-      message: "Data body can't be empty!"
+      message: 'Data body cant be empty!'
     });
   }
   if (!req.body.id || !req.body.type || !req.body.address){
     res.status(400).send({
-      message: "Content can't be empty"
+      message: 'Content cant be empty'
     });
-   return;
+    return;
   }
-
+  const id = req.params.id;
   customers.findOneAndUpdate({id}, req.body, {useFindAndModify: false})
     .then(data => {
       if (!data) {
         return res.status(404).send({
-          message:"Customer ID: "+id+" not found."
+          message: 'Customer ID: ' + id + ' not found'
         });
       } else
-      res.send({ message: "Customer "+id+ " updated"});       
+      res.send({ message: 'Customer ' + id + ' updated'});       
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Customer Update Error"
+          err.message  || 'Error updating customer'
       });
     });
 };  
@@ -78,21 +76,21 @@ exports.delete = (req, res) => {
     .then(data => {
       if (!data) {
         return res.status(404).send({
-          message:"Customer ID: "+id+" not found"
+          message: 'Customer ID: ' + id + ' not found'
         });
       }
-      res.send({ message: "Customer "+id+ " removed"});       
+      res.send({ message: 'Customer ' + id + ' removed'});       
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Customer Delete Error"
+          err.message  || 'Error removing customer'
       });
     });
 };  
 
 //Get All Customers
-//GET http://localhost:3000/customers/getAllCustomers
+//GET http://localhost:3000/customers/getAll
 exports.findAll = (req, res) => {
   customers.find({})
     .then(data => {
@@ -101,19 +99,20 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Customers Find All Error."
+          err.message  || 'Customers Find All Error'
       });
     });
 };
 
 //Get Customer by Id
-//GET http://localhost:3000/customers/getCustomerById/3
+//GET http://localhost:3000/customers/getById/3
 exports.findOne = (req, res) => {
-  customers.findOne({id: req.params.id})
+  const id = req.params.id;
+  customers.findOne({id})
     .then(data => {
       if (!data) {
         return res.status(404).send({
-          message:"Customer ID: "+req.params.id+" not found"
+          message: 'Customer ID: ' + id + ' not found'
         });
       }
       res.send(data);  
@@ -121,7 +120,27 @@ exports.findOne = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Customer Find One Error"
+          err.message  || 'Customer Find One Error'
       });
     });
 };  
+
+// Get Customer by Type
+//GET http://localhost:3000/customers/getByType/particular
+exports.findType = (req, res) => {
+  const type = req.params.type;
+  customers.find({type})
+  .then(data => {
+    if(!data){
+      return res.status(404).send({
+        message: 'Customer type: '+ type +' not found'
+      })
+    }
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: 'Customer find by type Error'
+    })
+  })
+}
