@@ -1,6 +1,6 @@
 module.exports = mongoose => {
     const technicians = mongoose.model(
-        "Technicians",
+        'Technicians',
         mongoose.Schema(
             {
                 id: Number,

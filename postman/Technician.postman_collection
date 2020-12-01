@@ -23,13 +23,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/technicians",
+					"raw": "localhost:3000/technicians/getAll",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"technicians"
+						"technicians",
+						"getAll"
 					]
 				}
 			},
@@ -53,14 +54,15 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/technicians/3",
+					"raw": "localhost:3000/technicians/getById/4",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"technicians",
-						"3"
+						"getById",
+						"4"
 					]
 				}
 			},
@@ -84,14 +86,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/technicians/name/Gabriel",
+					"raw": "localhost:3000/technicians/getByType/Gabriel",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"technicians",
-						"name",
+						"getByType",
 						"Gabriel"
 					]
 				}
@@ -113,13 +115,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/technicians",
+					"raw": "localhost:3000/technicians/addNew",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"technicians"
+						"technicians",
+						"addNew"
 					]
 				}
 			},
@@ -132,7 +135,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"typeBoilers\": [\r\n        2,\r\n        2\r\n    ],\r\n    \"_id\": \"5fc3d3070c0916276cd9d3bc\",\r\n    \"id\": 55,\r\n    \"name\": \"Gabriel\",\r\n    \"email\": \"gabi@zimbio.com\",\r\n    \"hourRate\": 11,\r\n    \"dailyCapacity\": 3\r\n}",
+					"raw": "{\r\n    \"typeBoilers\": [\r\n        3,\r\n        8\r\n    ],\r\n    \"id\": 200,\r\n    \"name\": \"Marcos\",\r\n    \"email\": \"Marcos@zimbio.com\",\r\n    \"hourRate\": 22,\r\n    \"dailyCapacity\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -140,13 +143,15 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/technicians",
+					"raw": "localhost:3000/technicians/updateById/77",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"technicians"
+						"technicians",
+						"updateById",
+						"77"
 					]
 				}
 			},
@@ -167,14 +172,15 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/technicians/3",
+					"raw": "localhost:3000/technicians/deleteById/77",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"technicians",
-						"3"
+						"deleteById",
+						"77"
 					]
 				}
 			},
