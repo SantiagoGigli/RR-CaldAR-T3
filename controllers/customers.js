@@ -53,7 +53,7 @@ exports.update = (req, res) => {
   const id = req.params.id;
   customers.findOneAndUpdate({id}, req.body, {useFindAndModify: false})
     .then(data => {
-      if (!data) {
+      if (!data){
         return res.status(404).send({
           message: 'Customer ID: ' + id + ' not found'
         });
@@ -74,7 +74,7 @@ exports.delete = (req, res) => {
   const id = req.params.id;
   customers.findOneAndRemove({id}, {useFindAndModify: false})
     .then(data => {
-      if (!data) {
+      if (!data){
         return res.status(404).send({
           message: 'Customer ID: ' + id + ' not found'
         });
@@ -133,14 +133,15 @@ exports.findType = (req, res) => {
   .then(data => {
     if(!data){
       return res.status(404).send({
-        message: 'Customer type: '+ type +' not found'
+        message: 'Customer type: ' + type + ' not found'
       })
     }
     res.send(data);
   })
   .catch(err => {
     res.status(500).send({
-      message: 'Customer find by type Error'
+      message: 
+        err.message || 'Customer find by type Error'
     })
   })
-}
+};

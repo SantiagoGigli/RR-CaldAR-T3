@@ -1,9 +1,9 @@
-const { Mongoose } = require("mongoose");
+const { Mongoose } = require('mongoose');
 
 // USE THE CODE BELOW AS EXAMPLE
 module.exports = mongoose => {
     const customers = mongoose.model(
-        "customers",
+        'customers',
         mongoose.Schema(
             {
                 id: Number,
