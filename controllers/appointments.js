@@ -30,7 +30,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error ocurred while creating the new boiler type"
+          err.message || 'Some error ocurred while creating the new boiler type'
       });
     });
 };
@@ -39,14 +39,14 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   if (!req.body){
     return res.status(400).send({
-      message: "Data body can't be empty!"
+      message: 'Data body can't be empty!'
     });
   }
 
   // Validate request
   if (!req.body.id || !req.body.idBuilding || !req.body.idBoiler || !req.body.date || !req.body.startTime || !req.body.endTime || !req.body.idTechnician || !req.body.type){
     res.status(400).send({
-      message: "Content can't be empty"
+      message: 'Content can't be empty'
     });
    return;
   }
@@ -60,7 +60,7 @@ exports.update = (req, res) => {
           message: `Can't update the appointment with id ${id}. Appointment was not found` 
         });
       } else{
-        res.send({message: "Appointment type was update successfuly"});
+        res.send({message: 'Appointment type was update successfully'});
       }
     })
     .catch(err => {
@@ -76,7 +76,7 @@ exports.delete = (req, res) => {
   appointments.findOneAndRemove({id}, {useFindAndModify: false})
   .then(data => 
     res.send({
-      message: "Appointment was removed successfuly"
+      message: 'Appointment was removed successfuly'
     })
   )
   .catch(err => {
@@ -94,7 +94,7 @@ exports.findAll = (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve appointments type"
+      message: 'Something happend, could not retrieve appointments type'
     });
   });
 };
@@ -112,7 +112,7 @@ exports.findOne = (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve appointment type"
+      message: 'Something happend, couldn't retrieve appointment type'
     });
   });
 };
@@ -130,7 +130,7 @@ exports.findType = (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve type"
+      message: 'Something happend, couldn't retrieve type'
     });
   });
 };

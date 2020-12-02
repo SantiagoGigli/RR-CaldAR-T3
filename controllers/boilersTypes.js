@@ -5,7 +5,7 @@ const boilersType = db.boilersType;
 // Validate
 exports.create = (req, res) => {
   if (!req.body.id || !req.body.description || !req.body.stock){
-    res.status(400).send({msg: "Content can't be empty"});
+    res.status(400).send({msg: 'Content can not be empty'});
     return;
   }
 
@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error ocurred while creating the new boiler type"
+          err.message || 'Some error ocurred while creating the new boiler type'
       });
     });
 };
@@ -34,14 +34,14 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   if (!req.body){
     return res.status(400).send({
-      message: "Data body can't be empty!"
+      message: 'Data body can not be empty!'
     });
   }
 
   // Validate request
   if (!req.body.id || !req.body.description || !req.body.stock){
     res.status(400).send({
-      message: "Content can't be empty"
+      message: 'Content can not be empty'
     });
    return;
   }
@@ -55,7 +55,7 @@ exports.update = (req, res) => {
           message: `Can't update boiler type with id ${id}. Boiler type was not found` 
         });
       } else{
-        res.send({message: "Boiler type was update successfuly"});
+        res.send({message: 'Boiler type was update successfully'});
       }
     })
     .catch(err => {
@@ -71,7 +71,7 @@ exports.delete = (req, res) => {
   boilersType.findOneAndRemove({id}, {useFindAndModify: false})
   .then(data => 
     res.send({
-      message: "Bolier type was removed successfuly"
+      message: 'Bolier type was removed successfully'
     })
   )
   .catch(err => {
@@ -89,7 +89,7 @@ exports.findAll = (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve boilers type"
+      message: 'Something happend, could not retrieve boilers type'
     });
   });
 };
@@ -107,7 +107,7 @@ exports.findOne = (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve boilers type"
+      message: 'Something happend, couldn not retrieve boilers type'
     });
   });
 };
@@ -125,7 +125,7 @@ exports.findDescription = (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message: "Something happend, couldn't retrieve boilers type"
+      message: 'Something happend, could not retrieve boilers type'
     });
   });
 };
