@@ -3,7 +3,7 @@ const { Mongoose } = require("mongoose");
 // USE THE CODE BELOW AS EXAMPLE
 module.exports = mongoose => {
     const buildings = mongoose.model(
-        "buildings",
+        'buildings',
         mongoose.Schema(
             {
                 id: Number,

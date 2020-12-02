@@ -4,12 +4,12 @@ const db = require('../models');
 const buildings = db.buildings;
 
 // Add a new buildings
-//POST http://localhost:3000/buildings
+//POST http://localhost:3000/buildings/addNew
 exports.create = (req, res) => {
   //Validate
   if (!req.body.id || !req.body.address){
     res.status(400).send({
-      message: "Building Creation need ID and ADDRESS."
+      message: 'Building Creation need ID and ADDRESS.'
     });
     return;
   };
@@ -33,18 +33,18 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Building Creation Error."
+          err.message  || 'Building Creation Error.'
       });
     });
 };
 
 //Update
-//PUT http://localhost:3000/buildings/1
+//PUT http://localhost:3000/buildings/updateById/1
 exports.update = (req, res) => {
   //Validate
   if (!req.body.id || !req.body.address){
     res.status(400).send({
-      message: "Building Update need ID and ADDRESS."
+      message: 'Building Update need ID and ADDRESS.'
     });
     return;
   };
@@ -53,44 +53,44 @@ exports.update = (req, res) => {
 
   buildings.findOneAndUpdate({id}, req.body, {useFindAndModify: false})
     .then(data => {
-      if (!data) {
+      if (!data){
         return res.status(404).send({
-          message:"Building ID: "+id+" not found."
+          message:'Building ID: '+id+' not found.'
         });
       } else
-      res.send({ message: "Building "+id+ " updated"});       
+      res.send({ message: 'Building '+id+ ' updated'});       
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Building Update Error."
+          err.message  || 'Building Update Error.'
       });
     });
 };  
 
 //Delete One
-//DELETE http://localhost:3000/buildings/1
+//DELETE http://localhost:3000/buildings/deleteById/1
 exports.delete = (req, res) => {
   const id = req.params.id;
   buildings.findOneAndRemove({id}, {useFindAndModify: false})
     .then(data => {
-      if (!data) {
+      if (!data){
         return res.status(404).send({
-          message:"Building ID: "+id+" not found."
+          message:'Building ID: '+id+' not found.'
         });
       }
-      res.send({ message: "Building "+id+ " removed"});       
+      res.send({ message: 'Building '+id+ ' removed'});       
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Building Delete One Error."
+          err.message  || 'Building Delete One Error.'
       });
     });
 };  
 
 //Retrieve All
-//GET http://localhost:3000/buildings
+//GET http://localhost:3000/buildings/getAll
 exports.findAll = (req, res) => {
   buildings.find({})
     .then(data => {
@@ -99,19 +99,19 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Building Find All Error."
+          err.message  || 'Building Find All Error.'
       });
     });
 };
 
 //Retrieve One
-//GET http://localhost:3000/buildings/1
+//GET http://localhost:3000/buildings/getById/1
 exports.findOne = (req, res) => {
   buildings.findOne({id: req.params.id})
     .then(data => {
-      if (!data) {
+      if (!data){
         return res.status(404).send({
-          message:"Building ID: "+req.params.id+" not found."
+          message:'Building ID: '+req.params.id+' not found.'
         });
       }
       res.send(data);  
@@ -119,7 +119,7 @@ exports.findOne = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Building Find One Error."
+          err.message  || 'Building Find One Error.'
       });
     });
 };  
@@ -135,7 +135,7 @@ exports.findAllByName = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Building Find All By Name Error."
+          err.message  || 'Building Find All By Name Error.'
       });
     });
 };
@@ -143,7 +143,6 @@ exports.findAllByName = (req, res) => {
 //Retrieve All By Boiler ID
 //GET http://localhost:3000/buildings/getAllByBoilerId/1
 exports.getAllByBoilerId = (req, res) => {
-  console.log(req.params.id);
   buildings.find({boilers: parseInt(req.params.id)})
     .then(data => {
       res.send(data);  
@@ -151,7 +150,7 @@ exports.getAllByBoilerId = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message  || "Building Find All By Boiler ID Error."
+          err.message  || 'Building Find All By Boiler ID Error.'
       });
     });
 };
