@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const db = require('../models');
 
-const add = async(req, res) => {
+const add = (req, res) => {
   const requieredParams = ['typeId', 'maintainanceRate', 'hourMaintainanceCost', 'hourEventualCost', 'idBuilding'];
   const requestBody = req.body;
   const requestParams = Object.keys(requestBody);
@@ -16,78 +16,90 @@ const add = async(req, res) => {
     hourEventualCost: requestBody.hourEventualCost,
     idBuilding: requestBody.idBuilding
   };
-  try{
-    const boiler = new db.Boiler(newBoilerJson);
-    await boiler.save();
-    res.json({msg:'Boiler added', boiler});
-  } catch(e){
-    res.status(400).json({msg:'Unable to add boiler'});
-  }
+  const boiler = new db.Boiler(newBoilerJson);
+  boiler.save()
+    .then(response => {
+      res.json({msg:'Boiler added', boiler: response});
+    })
+    .catch(e => {
+      res.status(400).json({msg:'Unable to add boiler'});
+  });
 };
 
-const getById = async(req, res) => {
-  try{
-    const boiler = await db.Boiler.findOne({_id: ObjectId(req.params.id)});
-    res.json(boiler);
-  } catch(e){
-    res.status(400).json({msg: `Unable to find boiler with id: ${req.query.id}`});
-  }
+const getById = (req, res) => {
+  db.Boiler.findOne({_id: ObjectId(req.params.id)})
+    .then(response => {
+      res.json(response);
+    })
+    .catch(e => {
+      res.status(400).json({msg: `Unable to find boiler with id: ${req.query.id}`});
+  });
 };
 
-const getAllBoilers = async(req, res) => {
-  try{
-    res.json(await db.Boiler.find());
-  } catch(e){
-    res.status(500).json({msg: 'Unable to get boilers'});
-  }
+const getAllBoilers = (req, res) => {
+  db.Boiler.find()
+    .then(response => {
+      res.json(response);
+    })
+    .catch(e => {
+      res.status(500).json({msg: 'Unable to get boilers'});
+  });
 };
 
-const getByBoilerType = async(req, res) => {
-  try{
-    res.json(await db.Boiler.find({typeId: req.query.typeId}));
-  } catch(e){
-    res.status(400).json({msg: 'Unable to get by boiler type'});
-  }
+const getByBoilerType = (req, res) => {
+  db.Boiler.find({typeId: req.query.typeId})
+    .then(response => {
+      res.json(response);
+    })
+    .catch(e => {
+      res.status(400).json({msg: 'Unable to get by boiler type'});
+  });
 };
 
-const getByBoilerMaintainanceRate = async(req, res) => {
-  try{
-    res.json(await db.Boiler.find({maintainanceRate: req.query.maintainanceRate}));
-  } catch(e){
-    res.status(400).json({msg: 'Unable to get by boiler type'});
-  }
+const getByBoilerMaintainanceRate = (req, res) => {
+  db.Boiler.find({maintainanceRate: req.query.maintainanceRate})
+    .then(response => {
+      res.json(response);
+    })
+    .catch(e => {
+      res.status(400).json({msg: 'Unable to get by boiler type'});
+  });
 };
 
-const getByBoilerBulding = async(req, res) => {
-  try{
-    res.json(await db.Boiler.find({idBuilding: req.query.idBuilding}));
-  } catch(e){
-    res.status(400).json({msg: 'Unable to get by boiler type'});
-  }
+const getByBoilerBulding = (req, res) => {
+  db.Boiler.find({idBuilding: req.query.idBuilding})
+    .then(response => {
+      res.json(response);
+    })
+    .catch(e => {
+      res.status(400).json({msg: 'Unable to get by boiler type'});
+  });
 };
 
-const updateBoiler = async(req, res) => {
+const updateBoiler = (req, res) => {
   const body = req.body;
-  try{
-    await db.Boiler.updateOne(
-      {_id: ObjectId(body.id)},
-      {
-        $set: body.update
-      }
-    );
-    res.json({msg: 'record updated!'});
-  } catch(e){
-    res.status(400).json({msg: 'Unable to update'});
-  }
+  db.Boiler.updateOne(
+    {_id: ObjectId(body.id)},
+    {
+      $set: body.update
+    }
+  )
+    .then(response => {
+      res.json({msg: 'record updated!'});
+    })
+    .catch(e => {
+      res.status(400).json({msg: 'Unable to update'});
+  });
 };
 
-const deleteBoiler = async(req, res) => {
-  try{
-    await db.Boiler.deleteOne({_id: ObjectId(req.params.id)});
-    res.json({msg: 'Deleted'});
-  } catch(e){
-    res.status(400).json({msg: 'Failed to delete'});
-  }
+const deleteBoiler = (req, res) => {
+  db.Boiler.deleteOne({_id: ObjectId(req.params.id)})
+    .then(reponse => {
+      res.json({msg: 'Deleted'});
+    })
+    .catch(e => {
+      res.status(400).json({msg: 'Failed to delete'});
+  });
 };
 
 module.exports = {add, getById, getAllBoilers, getByBoilerType, getByBoilerMaintainanceRate, getByBoilerBulding, updateBoiler, deleteBoiler};
