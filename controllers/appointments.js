@@ -5,7 +5,7 @@ const appointments = db.appointments;
 // Validate
 exports.create = (req, res) => {
   if (!req.body.id || !req.body.idBuilding || !req.body.idBoiler || !req.body.date || !req.body.startTime || !req.body.endTime || !req.body.idTechnician || !req.body.type){
-    res.status(400).send({msg: "Content can't be empty"});
+    res.status(400).send({msg: 'Content can\'t be empty'});
     return;
   }
 
