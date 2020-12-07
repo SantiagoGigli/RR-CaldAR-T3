@@ -57,8 +57,9 @@ exports.update = (req, res) => {
         return res.status(404).send({
           message: 'Customer ID: ' + id + ' not found'
         });
-      } else
-      res.send({ message: 'Customer ' + id + ' updated'});       
+      } else{
+          res.send({ message: 'Customer ' + id + ' updated'});
+      }       
     })
     .catch(err => {
       res.status(500).send({
@@ -110,7 +111,7 @@ exports.findOne = (req, res) => {
   const id = req.params.id;
   customers.findOne({id})
     .then(data => {
-      if (!data) {
+      if (!data){
         return res.status(404).send({
           message: 'Customer ID: ' + id + ' not found'
         });
