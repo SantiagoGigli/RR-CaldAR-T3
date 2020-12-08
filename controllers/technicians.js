@@ -1,17 +1,17 @@
-const db = require("../models");
+const db = require('../models');
 
-const Technician = db.technicians;
+const Technician = db.Technicians;
 
 exports.create = (req, res) => {
   if (
-    !req.body.name ||
-    !req.body.id ||
-    !req.body.email ||
-    !req.body.hourRate ||
-    !req.body.typeBoilers ||
-    !req.body.dailyCapacity
+    !req.body.name
+    || !req.body.id
+    || !req.body.email
+    || !req.body.hourRate
+    || !req.body.typeBoilers
+    || !req.body.dailyCapacity
   ) {
-    res.status(400).send({ message: "Content can not be empty!" });
+    res.status(400).send({ message: 'Content can not be empty!' });
     return;
   }
   const technician = new Technician({
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error ocurred while creating the technician.",
+          err.message || 'Some error ocurred while creating the technician.',
       });
     });
 };
@@ -43,7 +43,7 @@ exports.findAll = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error ocurred while retrieving technicians.",
+          err.message || 'Some error ocurred while retrieving technicians.',
       });
     });
 };
@@ -52,16 +52,17 @@ exports.findOne = (req, res) => {
   Technician.findOne({ id: req.params.id })
     .then((data) => {
       if (!data) {
-        return res.status(404).send({
+        res.status(404).send({
           message: `Technician with id ${req.params.id} was not found`,
         });
+        return;
       }
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error ocurred while retrieving technician.",
+          err.message || 'Some error ocurred while retrieving technician.',
       });
     });
 };
@@ -71,16 +72,17 @@ exports.findName = (req, res) => {
   Technician.findOne({ name })
     .then((data) => {
       if (!data) {
-        return res.status(404).send({
+        res.status(404).send({
           message: `Technician with name ${name} was not found`,
         });
+        return;
       }
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error ocurred while retrieving technician.",
+          err.message || 'Some error ocurred while retrieving technician.',
       });
     });
 };
@@ -88,29 +90,31 @@ exports.findName = (req, res) => {
 exports.delete = (req, res) => {
   const { id } = req.params;
   Technician.findOneAndRemove({ id }, { useFindeAndModify: false })
-    .then((data) => res.send({ message: "Technician was removed succesfully" }))
+    .then(() => res.send({ message: 'Technician was removed succesfully' }))
     .catch((err) => {
       res.status(500).send({
         message: `Some error ocurred while removing technician with id = ${id}`,
+        err,
       });
     });
 };
 
 exports.update = (req, res) => {
   if (!req.body) {
-    return res.status(400).send({
-      message: "Data to update can not be empty!",
+    res.status(400).send({
+      message: 'Data to update can not be empty!',
     });
+    return;
   }
   if (
-    !req.body.name ||
-    !req.body.id ||
-    !req.body.email ||
-    !req.body.hourRate ||
-    !req.body.typeBoilers ||
-    !req.body.dailyCapacity
+    !req.body.name
+    || !req.body.id
+    || !req.body.email
+    || !req.body.hourRate
+    || !req.body.typeBoilers
+    || !req.body.dailyCapacity
   ) {
-    res.status(400).send({ message: "Content can not be empty!" });
+    res.status(400).send({ message: 'Content can not be empty!' });
     return;
   }
   const { id } = req.params;
@@ -120,11 +124,12 @@ exports.update = (req, res) => {
         res.status(404).send({
           message: `Cannot update Technician with id = ${id}. Maybe Technician was not found`,
         });
-      } else res.send({ message: "Technician was updated succesfully" });
+      } else res.send({ message: 'Technician was updated succesfully' });
     })
     .catch((err) => {
       res.status(500).send({
         message: `Error updating Technician with id = ${id}`,
+        err,
       });
     });
 };

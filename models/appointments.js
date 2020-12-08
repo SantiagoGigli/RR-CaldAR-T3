@@ -1,6 +1,6 @@
 module.exports = (mongoose) => {
   const appointments = mongoose.model(
-    "appointments",
+    'appointments',
     mongoose.Schema(
       {
         id: Number,
@@ -12,8 +12,8 @@ module.exports = (mongoose) => {
         idTechnician: Number,
         type: String,
       },
-      { timestamps: true }
-    )
+      { timestamps: true },
+    ),
   );
   return appointments;
 };

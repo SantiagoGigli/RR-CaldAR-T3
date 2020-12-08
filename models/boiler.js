@@ -1,9 +1,7 @@
-const { Mongoose } = require("mongoose");
-
 // USE THE CODE BELOW AS EXAMPLE
 module.exports = (mongoose) => {
   const Boilers = mongoose.model(
-    "Boilers",
+    'Boilers',
     mongoose.Schema(
       {
         id: Number,
@@ -13,8 +11,8 @@ module.exports = (mongoose) => {
         hourEventualCost: Number,
         idBuilding: Number,
       },
-      { timestamps: true }
-    )
+      { timestamps: true },
+    ),
   );
   return Boilers;
 };

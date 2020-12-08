@@ -1,21 +1,20 @@
-const { ObjectId } = require("mongodb");
-const db = require("../models");
+const { ObjectId } = require('mongodb');
+const db = require('../models');
 
 const add = (req, res) => {
   const requieredParams = [
-    "typeId",
-    "maintainanceRate",
-    "hourMaintainanceCost",
-    "hourEventualCost",
-    "idBuilding",
+    'typeId',
+    'maintainanceRate',
+    'hourMaintainanceCost',
+    'hourEventualCost',
+    'idBuilding',
   ];
   const requestBody = req.body;
   const requestParams = Object.keys(requestBody);
-  const isRequestComplete = requieredParams.every((key) =>
-    requestParams.includes(key)
-  );
+  const isRequestComplete = requieredParams.every((key) => requestParams.includes(key));
   if (!isRequestComplete) {
-    return res.status(400).json({ msg: "There are missing fields" });
+    res.status(400).json({ msg: 'There are missing fields' });
+    return;
   }
   const newBoilerJson = {
     typeId: requestBody.typeId,
@@ -28,10 +27,10 @@ const add = (req, res) => {
   boiler
     .save()
     .then((response) => {
-      res.json({ msg: "Boiler added", boiler: response });
+      res.json({ msg: 'Boiler added', boiler: response });
     })
     .catch((e) => {
-      res.status(400).json({ msg: "Unable to add boiler" });
+      res.status(400).json({ msg: 'Unable to add boiler', e });
     });
 };
 
@@ -43,7 +42,7 @@ const getById = (req, res) => {
     .catch((e) => {
       res
         .status(400)
-        .json({ msg: `Unable to find boiler with id: ${req.query.id}` });
+        .json({ msg: `Unable to find boiler with id: ${req.query.id}`, e });
     });
 };
 
@@ -53,7 +52,7 @@ const getAllBoilers = (req, res) => {
       res.json(response);
     })
     .catch((e) => {
-      res.status(500).json({ msg: "Unable to get boilers" });
+      res.status(500).json({ msg: 'Unable to get boilers', e });
     });
 };
 
@@ -63,7 +62,7 @@ const getByBoilerType = (req, res) => {
       res.json(response);
     })
     .catch((e) => {
-      res.status(400).json({ msg: "Unable to get by boiler type" });
+      res.status(400).json({ msg: 'Unable to get by boiler type', e });
     });
 };
 
@@ -73,7 +72,7 @@ const getByBoilerMaintainanceRate = (req, res) => {
       res.json(response);
     })
     .catch((e) => {
-      res.status(400).json({ msg: "Unable to get by boiler type" });
+      res.status(400).json({ msg: 'Unable to get by boiler type', e });
     });
 };
 
@@ -83,7 +82,7 @@ const getByBoilerBulding = (req, res) => {
       res.json(response);
     })
     .catch((e) => {
-      res.status(400).json({ msg: "Unable to get by boiler type" });
+      res.status(400).json({ msg: 'Unable to get by boiler type', e });
     });
 };
 
@@ -93,23 +92,23 @@ const updateBoiler = (req, res) => {
     { _id: ObjectId(body.id) },
     {
       $set: body.update,
-    }
+    },
   )
-    .then((response) => {
-      res.json({ msg: "record updated!" });
+    .then(() => {
+      res.json({ msg: 'record updated!' });
     })
     .catch((e) => {
-      res.status(400).json({ msg: "Unable to update" });
+      res.status(400).json({ msg: 'Unable to update', e });
     });
 };
 
 const deleteBoiler = (req, res) => {
   db.Boiler.deleteOne({ _id: ObjectId(req.params.id) })
-    .then((reponse) => {
-      res.json({ msg: "Deleted" });
+    .then(() => {
+      res.json({ msg: 'Deleted' });
     })
     .catch((e) => {
-      res.status(400).json({ msg: "Failed to delete" });
+      res.status(400).json({ msg: 'Failed to delete', e });
     });
 };
 

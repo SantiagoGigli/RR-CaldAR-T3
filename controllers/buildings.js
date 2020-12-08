@@ -1,6 +1,6 @@
-const db = require("../models");
+const db = require('../models');
 
-const { buildings } = db;
+const { Buildings } = db;
 
 // Add a new buildings
 // POST http://localhost:3000/buildings/addNew
@@ -8,13 +8,13 @@ exports.create = (req, res) => {
   // Validate
   if (!req.body.id || !req.body.address) {
     res.status(400).send({
-      message: "Building Creation need ID and ADDRESS.",
+      message: 'Building Creation need ID and ADDRESS.',
     });
     return;
   }
 
   // Create
-  const building = new buildings({
+  const building = new Buildings({
     id: req.body.id,
     address: req.body.address,
     name: req.body.name,
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Building Creation Error.",
+        message: err.message || 'Building Creation Error.',
       });
     });
 };
@@ -42,14 +42,14 @@ exports.update = (req, res) => {
   // Validate
   if (!req.body.id || !req.body.address) {
     res.status(400).send({
-      message: "Building Update need ID and ADDRESS.",
+      message: 'Building Update need ID and ADDRESS.',
     });
     return;
   }
 
   const { id } = req.params;
 
-  buildings
+  Buildings
     .findOneAndUpdate({ id }, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
@@ -57,11 +57,11 @@ exports.update = (req, res) => {
           message: `Building ID: ${id} not found.`,
         });
       }
-      res.send({ message: `Building ${id} updated` });
+      return res.send({ message: `Building ${id} updated` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Building Update Error.",
+        message: err.message || 'Building Update Error.',
       });
     });
 };
@@ -70,7 +70,7 @@ exports.update = (req, res) => {
 // DELETE http://localhost:3000/buildings/deleteById/1
 exports.delete = (req, res) => {
   const { id } = req.params;
-  buildings
+  Buildings
     .findOneAndRemove({ id }, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
@@ -78,11 +78,11 @@ exports.delete = (req, res) => {
           message: `Building ID: ${id} not found.`,
         });
       }
-      res.send({ message: `Building ${id} removed` });
+      return res.send({ message: `Building ${id} removed` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Building Delete One Error.",
+        message: err.message || 'Building Delete One Error.',
       });
     });
 };
@@ -90,65 +90,62 @@ exports.delete = (req, res) => {
 // Retrieve All
 // GET http://localhost:3000/buildings/getAll
 exports.findAll = (req, res) => {
-  buildings
+  Buildings
     .find({})
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Building Find All Error.",
+        message: err.message || 'Building Find All Error.',
       });
     });
 };
 
 // Retrieve One
 // GET http://localhost:3000/buildings/getById/1
-exports.findOne = (req, res) => {
-  buildings
-    .findOne({ id: req.params.id })
-    .then((data) => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Building ID: ${req.params.id} not found.`,
-        });
-      }
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Building Find One Error.",
+exports.findOne = (req, res) => Buildings
+  .findOne({ id: req.params.id })
+  .then((data) => {
+    if (!data) {
+      res.status(404).send({
+        message: `Building ID: ${req.params.id} not found.`,
       });
+      return;
+    }
+    res.send(data);
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message: err.message || 'Building Find One Error.',
     });
-};
+  });
 
 // Retrieve All By Name
 // GET http://localhost:3000/buildings/getAllByName?name=Empire 2
 exports.findAllByName = (req, res) => {
   const namePar = req.query.name;
-  buildings
+  Buildings
     .find({ name: namePar })
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Building Find All By Name Error.",
+        message: err.message || 'Building Find All By Name Error.',
       });
     });
 };
 
 // Retrieve All By Boiler ID
 // GET http://localhost:3000/buildings/getAllByBoilerId/1
-exports.getAllByBoilerId = (req, res) => {
-  buildings
-    .find({ boilers: parseInt(req.params.id) })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Building Find All By Boiler ID Error.",
-      });
+exports.getAllByBoilerId = (req, res) => Buildings
+  .find({ boilers: parseInt(req.params.id) })
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message: err.message || 'Building Find All By Boiler ID Error.',
     });
-};
+  });

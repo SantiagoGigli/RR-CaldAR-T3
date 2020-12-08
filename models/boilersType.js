@@ -1,14 +1,14 @@
 module.exports = (mongoose) => {
   const boilersType = mongoose.model(
-    "boilersType",
+    'BoilersType',
     mongoose.Schema(
       {
         id: Number,
         description: String,
         stock: Number,
       },
-      { timestamps: true }
-    )
+      { timestamps: true },
+    ),
   );
   return boilersType;
 };

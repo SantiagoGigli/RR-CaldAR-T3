@@ -1,6 +1,6 @@
 module.exports = (mongoose) => {
   const technicians = mongoose.model(
-    "Technicians",
+    'Technicians',
     mongoose.Schema(
       {
         id: Number,
@@ -10,8 +10,8 @@ module.exports = (mongoose) => {
         typeBoilers: [],
         dailyCapacity: Number,
       },
-      { timestamps: true }
-    )
+      { timestamps: true },
+    ),
   );
   return technicians;
 };

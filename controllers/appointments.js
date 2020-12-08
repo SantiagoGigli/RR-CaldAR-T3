@@ -1,26 +1,26 @@
-const db = require("../models");
+const db = require('../models');
 
-const { appointments } = db;
+const { Appointments } = db;
 
 // Create new appointment
 // Validate
 exports.create = (req, res) => {
   if (
-    !req.body.id ||
-    !req.body.idBuilding ||
-    !req.body.idBoiler ||
-    !req.body.date ||
-    !req.body.startTime ||
-    !req.body.endTime ||
-    !req.body.idTechnician ||
-    !req.body.type
+    !req.body.id
+    || !req.body.idBuilding
+    || !req.body.idBoiler
+    || !req.body.date
+    || !req.body.startTime
+    || !req.body.endTime
+    || !req.body.idTechnician
+    || !req.body.type
   ) {
-    res.status(400).send({ msg: "Content can't be empty" });
+    res.status(400).send({ msg: 'Content can not be empty' });
     return;
   }
 
   // Create
-  const newAppointments = new appointments({
+  const newAppointments = new Appointments({
     id: req.body.id,
     idBuilding: req.body.idBuilding,
     idBoiler: req.body.idBoiler,
@@ -40,8 +40,8 @@ exports.create = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message ||
-          "Some error ocurred while creating the new boiler type",
+          err.message
+          || 'Some error ocurred while creating the new boiler type',
       });
     });
 };
@@ -50,30 +50,29 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
-      message: "Data body can't be empty!",
+      message: 'Data body can not be empty!',
     });
   }
 
   // Validate request
   if (
-    !req.body.id ||
-    !req.body.idBuilding ||
-    !req.body.idBoiler ||
-    !req.body.date ||
-    !req.body.startTime ||
-    !req.body.endTime ||
-    !req.body.idTechnician ||
-    !req.body.type
+    !req.body.id
+    || !req.body.idBuilding
+    || !req.body.idBoiler
+    || !req.body.date
+    || !req.body.startTime
+    || !req.body.endTime
+    || !req.body.idTechnician
+    || !req.body.type
   ) {
-    res.status(400).send({
-      message: "Content can't be empty",
+    return res.status(400).send({
+      message: 'Content can not be empty',
     });
-    return;
   }
 
   const { id } = req.params;
 
-  appointments
+  return Appointments
     .findOneAndUpdate({ id }, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
@@ -81,12 +80,13 @@ exports.update = (req, res) => {
           message: `Can't update the appointment with id ${id}. Appointment was not found`,
         });
       } else {
-        res.send({ message: "Appointment type was update successfully" });
+        res.send({ message: 'Appointment type was update successfully' });
       }
     })
     .catch((err) => {
       res.status(500).send({
         message: `Error updating the Appointments with id ${id}`,
+        err,
       });
     });
 };
@@ -94,68 +94,62 @@ exports.update = (req, res) => {
 // Delete appointment by id
 exports.delete = (req, res) => {
   const { id } = req.params;
-  appointments
+  Appointments
     .findOneAndRemove({ id }, { useFindAndModify: false })
-    .then((data) =>
-      res.send({
-        message: "Appointment was removed successfuly",
-      })
-    )
+    .then(() => res.send({
+      message: 'Appointment was removed successfuly',
+    }))
     .catch((err) => {
       res.status(500).send({
         message: `Error removing appointment ${id}`,
+        err,
       });
     });
 };
 
 // Get all appointments type
 exports.findAll = (req, res) => {
-  appointments
+  Appointments
     .find({})
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Something happend, could not retrieve appointments type",
+        message: 'Something happend, could not retrieve appointments type',
+        err,
       });
     });
 };
 
 // Get appointment by id
-exports.findOne = (req, res) => {
-  appointments
-    .findOne({ id: req.params.id })
-    .then((data) => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Couldn't find appointment type witd id ${id}`,
-        });
-      }
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Something happend, couldn't retrieve appointment type",
+exports.findOne = (req, res) => Appointments
+  .findOne({ id: req.params.id })
+  .then((data) => {
+    if (!data) {
+      return res.status(404).send({
+        message: `Couldn't find appointment type witd id ${req.params.id}`,
       });
-    });
-};
+    }
+    return res.send(data);
+  })
+  .catch((err) => res.status(500).send({
+    message: 'Something happend, could not retrieve appointment type',
+    err,
+  }));
 
 // Get appointment type Monthly by id
-exports.findType = (req, res) => {
-  appointments
-    .find({ type: req.params.type })
-    .then((data) => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Couldn't find type ${type}`,
-        });
-      }
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Something happend, couldn't retrieve type",
+exports.findType = (req, res) => Appointments
+  .find({ type: req.params.type })
+  .then((data) => {
+    if (!data) {
+      return res.status(404).send({
+        message: `Could not find type ${req.params.type}`,
       });
-    });
-};
+    }
+    return res.send(data);
+  })
+  .catch((err) => res.status(500).send({
+    message: 'Something happend, could not retrieve type',
+    err,
+  }));
