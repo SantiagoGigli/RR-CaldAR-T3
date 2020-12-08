@@ -1,6 +1,5 @@
-const boilersType = require('../controllers/boilersTypes.js');
 const router = require('express').Router();
-
+const boilersType = require('../controllers/boilersTypes.js');
 
 // Add a new boiler type
 router.post('/addNew', boilersType.create);

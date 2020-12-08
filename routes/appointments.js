@@ -1,6 +1,5 @@
-const appointments = require('../controllers/appointments.js');
 const router = require('express').Router();
-
+const appointments = require('../controllers/appointments.js');
 
 // Add a new appointments
 router.post('/addNew', appointments.create);

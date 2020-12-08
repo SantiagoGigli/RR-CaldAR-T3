@@ -4,7 +4,9 @@
   "description": "Radium Rocket Course CaldAR application T3",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index"
+    "start": "nodemon index",
+    "lint": "eslint ./",
+    "lint-fix": "eslint ./ --fix"
   },
   "repository": {
     "type": "git",
@@ -25,14 +27,14 @@
   },
   "devDependencies": {
     "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "husky": "^4.3.5",
-    "nodemon": "^2.0.6",
-    "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0"
+    "nodemon": "^2.0.6"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "npm run lint"
     }
   },
   "keywords": []

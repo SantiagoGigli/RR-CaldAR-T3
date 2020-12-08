@@ -1,5 +1,5 @@
-const customers = require('../controllers/customers');
 const router = require('express').Router();
+const customers = require('../controllers/customers');
 
 // Add a new customer
 router.post('/add', customers.create);
@@ -16,7 +16,7 @@ router.get('/getAll', customers.findAll);
 // Get customer by ID
 router.get('/getById/:id', customers.findOne);
 
-//Get customer by Type
+// Get customer by Type
 router.get('/getByType/:type', customers.findType);
 
 module.exports = router;

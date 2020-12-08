@@ -1,5 +1,5 @@
-const technicians = require('../controllers/technicians.js');
 const router = require('express').Router();
+const technicians = require('../controllers/technicians.js');
 
 router.post('/addNew', technicians.create);
 router.put('/updateById/:id', technicians.update);
