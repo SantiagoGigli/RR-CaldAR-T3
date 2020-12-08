@@ -1,5 +1,5 @@
-const boilers = require('../controllers/boilers.js');
 const router = require('express').Router();
+const boilers = require('../controllers/boilers.js');
 
 router.post('/addNew', boilers.add);
 
