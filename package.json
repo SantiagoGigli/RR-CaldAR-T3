@@ -24,7 +24,16 @@
     "mongoose": "^5.10.17"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "eslint": "^7.15.0",
+    "husky": "^4.3.5",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "keywords": []
 }
