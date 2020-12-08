@@ -7,7 +7,6 @@ const add = (req, res) => {
     'maintainanceRate',
     'hourMaintainanceCost',
     'hourEventualCost',
-    'idBuilding',
   ];
   const requestBody = req.body;
   const requestParams = Object.keys(requestBody);
@@ -21,7 +20,7 @@ const add = (req, res) => {
     maintainanceRate: requestBody.maintainanceRate,
     hourMaintainanceCost: requestBody.hourMaintainanceCost,
     hourEventualCost: requestBody.hourEventualCost,
-    idBuilding: requestBody.idBuilding,
+    idBuilding: requestBody.idBuilding ? ObjectId(requestBody.idBuilding) : null,
   };
   const boiler = new db.Boiler(newBoilerJson);
   boiler
@@ -30,7 +29,7 @@ const add = (req, res) => {
       res.json({ msg: 'Boiler added', boiler: response });
     })
     .catch((e) => {
-      res.status(400).json({ msg: 'Unable to add boiler', e });
+      res.status(500).json({ msg: 'Unable to add boiler', e });
     });
 };
 
@@ -41,7 +40,7 @@ const getById = (req, res) => {
     })
     .catch((e) => {
       res
-        .status(400)
+        .status(500)
         .json({ msg: `Unable to find boiler with id: ${req.query.id}`, e });
     });
 };
