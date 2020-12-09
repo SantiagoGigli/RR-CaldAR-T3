@@ -26,7 +26,9 @@ db.mongoose
     process.exit();
   });
 
-app.use(router);
+app.use('/api', router);
+app.use(express.static('public'));
+app.get('*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

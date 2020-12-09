@@ -2,24 +2,24 @@ const router = require('express').Router();
 const buildings = require('../controllers/buildings.js');
 
 // Add a new buildings
-router.post('/addNew', buildings.create);
+router.post('/', buildings.create);
 
 // Update a buildings
-router.put('/updateById/:id', buildings.update);
+router.put('/:id', buildings.update);
 
 // Delete a buildings by ID
-router.delete('/deleteById/:id', buildings.delete);
+router.delete('/:id', buildings.delete);
 
 // Get all the buildings
-router.get('/getAll', buildings.findAll);
+router.get('/', buildings.findAll);
 
 // Get all by Boiler Id
-router.get('/getAllByBoilerId/:id', buildings.getAllByBoilerId);
+router.get('/:id', buildings.getAllByBoilerId);
 
 // Get all by name
-router.get('/getAllByName', buildings.findAllByName);
+router.get('/', buildings.findAllByName);
 
 // Get buildings by ID
-router.get('/getById/:id', buildings.findOne);
+router.get('/:id', buildings.findOne);
 
 module.exports = router;

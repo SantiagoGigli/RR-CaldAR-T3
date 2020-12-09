@@ -3,21 +3,21 @@ const router = require('express').Router();
 const customers = require('../controllers/customers');
 
 // Add a new customer
-router.post('/add', customers.create);
+router.post('/', customers.create);
 
 // Update a customer
-router.put('/update/:id', customers.update);
+router.put('/:id', customers.update);
 
 // Delete a customer by ID
-router.delete('/delete/:id', customers.delete);
+router.delete('/:id', customers.delete);
 
 // Get all the customers
-router.get('/getAll', customers.findAll);
+router.get('/', customers.findAll);
 
 // Get customer by ID
-router.get('/getById/:id', customers.findOne);
+router.get('/:id', customers.findOne);
 
 // Get customer by Type
-router.get('/getByType/:type', customers.findType);
+router.get('/:type', customers.findType);
 
 module.exports = router;
