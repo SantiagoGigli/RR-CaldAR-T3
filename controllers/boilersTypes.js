@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const db = require('../models');
 
 const { BoilersType } = db;
@@ -104,7 +105,7 @@ exports.findAll = (req, res) => {
 // Get boiler type by id
 exports.findOne = (req, res) => {
   BoilersType
-    .findOne({ id: req.params.id })
+    .findOne({ _id: ObjectId(req.params.id) })
     .then((data) => {
       if (!data) {
         res.status(404).send({

@@ -1,4 +1,3 @@
-// Emiliano
 const express = require('express');
 
 const app = express();
@@ -11,7 +10,6 @@ const router = require('./routes');
 
 app.use(bodyParser.json());
 
-/* eslint-disable no-console */
 // Connect to the server
 db.mongoose
   .connect(db.url, {
@@ -26,11 +24,15 @@ db.mongoose
     process.exit();
   });
 
+// API Rest routes
 app.use('/api', router);
+
+// Static Files
 app.use(express.static('public'));
+
+// Redirect to index
 app.get('*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-/* eslint-enable no-console */
