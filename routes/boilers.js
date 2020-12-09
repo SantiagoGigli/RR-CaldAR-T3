@@ -1,20 +1,20 @@
 const router = require('express').Router();
 const boilers = require('../controllers/boilers.js');
 
-router.post('/addNew', boilers.add);
+router.post('/', boilers.add);
 
-router.get('/getById/:id', boilers.getById);
+router.get('/:id', boilers.getById);
 
-router.get('/getAllBoilers', boilers.getAllBoilers);
+router.get('/', boilers.getAllBoilers);
 
-router.get('/getByBoilerType', boilers.getByBoilerType);
+router.get('/', boilers.getByBoilerType);
 
-router.get('/getByBoilerMaintainanceRate', boilers.getByBoilerMaintainanceRate);
+router.get('/', boilers.getByBoilerMaintainanceRate);
 
-router.get('/getByBoilerBulding', boilers.getByBoilerBulding);
+router.get('/', boilers.getByBoilerBulding);
 
-router.put('/updateById', boilers.updateBoiler);
+router.put('/:id', boilers.updateBoiler);
 
-router.delete('/deleteById/:id', boilers.deleteBoiler);
+router.delete('/:id', boilers.deleteBoiler);
 
 module.exports = router;

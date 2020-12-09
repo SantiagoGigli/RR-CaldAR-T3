@@ -2,21 +2,21 @@ const router = require('express').Router();
 const appointments = require('../controllers/appointments.js');
 
 // Add a new appointments
-router.post('/addNew', appointments.create);
+router.post('/', appointments.create);
 
 // Update a appointments type
-router.put('/updateById/:id', appointments.update);
+router.put('/:id', appointments.update);
 
 // Delete a appointments type by ID
-router.delete('/deleteById/:id', appointments.delete);
+router.delete('/:id', appointments.delete);
 
 // Get all the appointments type
-router.get('/getAll', appointments.findAll);
+router.get('/', appointments.findAll);
 
 // Get appointments by ID
-router.get('/getById/:id', appointments.findOne);
+router.get('/:id', appointments.findOne);
 
 // Get appointments by type (Monthly / Eventual)
-router.get('/getByType/:type', appointments.findType);
+router.get('/:type', appointments.findType);
 
 module.exports = router;

@@ -1,17 +1,22 @@
+const idValidator = require('mongoose-id-validator');
+
 module.exports = (mongoose) => {
-  const technicians = mongoose.model(
+  const techniciansSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    hourRate: Number,
+    typeBoilers: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'BoilersType',
+      required: true,
+    }],
+    dailyCapacity: Number,
+  },
+  { timestamps: true });
+  techniciansSchema.plugin(idValidator);
+  const Technicians = mongoose.model(
     'Technicians',
-    mongoose.Schema(
-      {
-        id: Number,
-        name: String,
-        email: String,
-        hourRate: Number,
-        typeBoilers: [],
-        dailyCapacity: Number,
-      },
-      { timestamps: true },
-    ),
+    techniciansSchema,
   );
-  return technicians;
+  return Technicians;
 };
