@@ -3,7 +3,6 @@ module.exports = (mongoose) => {
     'BoilersType',
     mongoose.Schema(
       {
-        id: Number,
         description: String,
         stock: Number,
       },
