@@ -6,7 +6,7 @@ const { BoilersType } = db;
 // Create new boiler type
 // Validate
 exports.create = (req, res) => {
-  if (!req.body.id || !req.body.description || !req.body.stock) {
+  if (!req.body.description || !req.body.stock) {
     res.status(400).send({ msg: 'Content can not be empty' });
     return;
   }
@@ -53,7 +53,7 @@ exports.update = (req, res) => {
   const { id } = req.params;
 
   BoilersType
-    .findOneAndUpdate({ id }, req.body, { useFindAndModify: false })
+    .findOneAndUpdate({ _id: ObjectId(req.params.id) }, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
         res.status(400).send({
@@ -75,7 +75,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const { id } = req.params;
   BoilersType
-    .findOneAndRemove({ id }, { useFindAndModify: false })
+    .findOneAndRemove({ _id: ObjectId(req.params.id) }, { useFindAndModify: false })
     .then(() => res.send({
       message: 'Bolier type was removed successfully',
     }))
