@@ -1,3 +1,4 @@
+const { ObjectID } = require('mongodb');
 const db = require('../models');
 
 const Technician = db.Technicians;
@@ -5,7 +6,6 @@ const Technician = db.Technicians;
 exports.create = (req, res) => {
   if (
     !req.body.name
-    || !req.body.id
     || !req.body.email
     || !req.body.hourRate
     || !req.body.typeBoilers
@@ -15,7 +15,6 @@ exports.create = (req, res) => {
     return;
   }
   const technician = new Technician({
-    id: req.body.id,
     name: req.body.name,
     email: req.body.email,
     hourRate: req.body.hourRate,
@@ -38,7 +37,9 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   Technician.find({})
     .then((data) => {
-      res.send(data);
+      res.status(200).send({
+        message: 'Request completed succesfully.', data,
+      });
     })
     .catch((err) => {
       res.status(500).send({
@@ -49,7 +50,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  Technician.findOne({ id: req.params.id })
+  Technician.findOne({ _id: ObjectID(req.params.id) })
     .then((data) => {
       if (!data) {
         res.status(404).send({
@@ -57,7 +58,9 @@ exports.findOne = (req, res) => {
         });
         return;
       }
-      res.send(data);
+      res.status(200).send({
+        message: 'Request completed succesfully.', data,
+      });
     })
     .catch((err) => {
       res.status(500).send({
@@ -77,7 +80,9 @@ exports.findName = (req, res) => {
         });
         return;
       }
-      res.send(data);
+      res.status(200).send({
+        message: 'Request completed succesfully.', data,
+      });
     })
     .catch((err) => {
       res.status(500).send({
@@ -88,12 +93,11 @@ exports.findName = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const { id } = req.params;
-  Technician.findOneAndRemove({ id }, { useFindeAndModify: false })
-    .then(() => res.send({ message: 'Technician was removed succesfully' }))
+  Technician.findOneAndRemove({ _id: ObjectID(req.params.id) }, { useFindeAndModify: false })
+    .then(() => res.status(200).send({ message: 'Technician was removed succesfully' }))
     .catch((err) => {
       res.status(500).send({
-        message: `Some error ocurred while removing technician with id = ${id}`,
+        message: `Some error ocurred while removing technician with id = ${ObjectID(req.params.id)}`,
         err,
       });
     });
@@ -108,7 +112,6 @@ exports.update = (req, res) => {
   }
   if (
     !req.body.name
-    || !req.body.id
     || !req.body.email
     || !req.body.hourRate
     || !req.body.typeBoilers
@@ -117,18 +120,18 @@ exports.update = (req, res) => {
     res.status(400).send({ message: 'Content can not be empty!' });
     return;
   }
-  const { id } = req.params;
-  Technician.findOneAndUpdate({ id }, req.body, { useFindAndModify: false })
+  Technician.findOneAndUpdate({ _id: ObjectID(req.params.id) }, req.body,
+    { useFindAndModify: false })
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update Technician with id = ${id}. Maybe Technician was not found`,
+          message: `Cannot update Technician with id = ${ObjectID(req.params.id)}. Maybe Technician was not found`,
         });
-      } else res.send({ message: 'Technician was updated succesfully' });
+      } else res.status(200).send({ message: 'Technician was updated succesfully' });
     })
     .catch((err) => {
       res.status(500).send({
-        message: `Error updating Technician with id = ${id}`,
+        message: `Error updating Technician with id = ${ObjectID(req.params.id)}`,
         err,
       });
     });
