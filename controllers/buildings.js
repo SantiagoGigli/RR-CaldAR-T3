@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-//const { parse } = require('dotenv/types');
-const { Int32 } = require('mongodb');
-=======
->>>>>>> dc4223e88fc1a751f57c6be9fff5b77b60c8c5fb
 const db = require('../models');
 
 const { Buildings } = db;

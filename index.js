@@ -1,20 +1,12 @@
-<<<<<<< HEAD
-=======
-// Emiliano
->>>>>>> dc4223e88fc1a751f57c6be9fff5b77b60c8c5fb
 const express = require('express');
 
 const app = express();
 const bodyParser = require('body-parser');
-<<<<<<< HEAD
-const port = process.env.PORT || 3000;
-//const dotenv = require('dotenv').config();
-=======
 
 const port = process.env.PORT || 3000;
 require('dotenv').config();
->>>>>>> dc4223e88fc1a751f57c6be9fff5b77b60c8c5fb
 const db = require('./models');
+
 const router = require('./routes');
 
 app.use(bodyParser.json());

@@ -60,15 +60,9 @@ exports.update = (req, res) => {
         res.status(404).send({
           message: `Customer ID: ${id} not found`,
         });
-<<<<<<< HEAD
-      } else{
-          res.send({ message: 'Customer ' + id + ' updated'});
-      }       
-=======
         return;
       }
       res.send({ message: `Customer ${id} updated` });
->>>>>>> dc4223e88fc1a751f57c6be9fff5b77b60c8c5fb
     })
     .catch((err) => res.status(500).send({
       message: err.message || 'Error updating customer',
@@ -112,18 +106,11 @@ exports.findAll = (req, res) => {
 // Get Customer by Id
 // GET http://localhost:3000/customers/getById/3
 exports.findOne = (req, res) => {
-<<<<<<< HEAD
-  const id = req.params.id;
-  customers.findOne({id})
-    .then(data => {
-      if (!data){
-=======
   const { id } = req.params;
   Customers
     .findOne({ id })
     .then((data) => {
       if (!data) {
->>>>>>> dc4223e88fc1a751f57c6be9fff5b77b60c8c5fb
         return res.status(404).send({
           message: `Customer ID: ${id} not found`,
         });
