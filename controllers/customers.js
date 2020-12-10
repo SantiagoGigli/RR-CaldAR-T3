@@ -1,8 +1,7 @@
 const { ObjectID } = require('mongodb');
 const db = require('../models');
 
-// eslint-disable-next-line prefer-destructuring
-const Customers = db.Customers;
+const { Customers } = db;
 
 // Add a new customer
 // POST http://localhost:3000/api/customers/
@@ -37,7 +36,7 @@ exports.create = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || 'Some error ocurred while creating the new customer',
+          err.message || 'Some error ocurred while creating the new Customer',
       });
     });
 };
@@ -66,13 +65,13 @@ exports.update = (req, res) => {
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update Customer with id = ${ObjectID(req.params.id)}. Maybe Customer was not found`,
+          message: `Cannot update Customer with id ${ObjectID(req.params.id)}`,
         });
       }
       return res.status(200).send({ message: 'Customer was updated succesfully' });
     })
     .catch((err) => res.status(500).send({
-      message: err.message || `Error updating Customer with id = ${ObjectID(req.params.id)}`,
+      message: err.message || `Error updating Customer with id ${ObjectID(req.params.id)}`,
     }));
 };
 
@@ -84,7 +83,7 @@ exports.delete = (req, res) => {
     .then((data) => {
       if (!data) {
         return res.status(404).send({
-          message: `Customer ID: ${ObjectID(req.params.id)} was not found`,
+          message: `Customer ID ${ObjectID(req.params.id)} was not found`,
         });
       }
       return res.send({ message: 'Customer was removed succesfully' });
@@ -117,7 +116,7 @@ exports.findOne = (req, res) => {
     .then((data) => {
       if (!data) {
         return res.status(404).send({
-          message: `Customer with ID: ${req.params.id} was not found`,
+          message: `Customer with ID ${req.params.id} was not found`,
         });
       }
       return res.status(200).send({
@@ -130,7 +129,7 @@ exports.findOne = (req, res) => {
 };
 
 // Get Customer by Type
-// GET http://localhost:3000/api/customers/getByType/particular
+// GET http://localhost:3000/api/customers/type/particular
 exports.findType = (req, res) => {
   const { type } = req.params;
   Customers
