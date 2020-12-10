@@ -2,7 +2,6 @@ const idValidator = require('mongoose-id-validator');
 
 module.exports = (mongoose) => {
   const customersSchema = new mongoose.Schema({
-    id: Number,
     type: {
       type: String,
       enum: ['particular', 'bussiness'],
@@ -13,15 +12,15 @@ module.exports = (mongoose) => {
       type: String,
       required: true,
     },
-    buildings:[{
+    buildings: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Buildings',
+      ref: 'buildings',
     }],
   },
   { timestamps: true });
   customersSchema.plugin(idValidator);
   const Customers = mongoose.model(
-    'Customers',
+    'customers',
     customersSchema,
   );
   return Customers;
