@@ -1,5 +1,5 @@
 const idValidator = require('mongoose-id-validator');
-// USE THE CODE BELOW AS EXAMPLE
+
 module.exports = (mongoose) => {
   const boilerSchema = new mongoose.Schema({
     maintainanceRate: String,

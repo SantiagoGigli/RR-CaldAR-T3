@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const db = require('../models');
 
 const { Appointments } = db;
@@ -6,8 +7,7 @@ const { Appointments } = db;
 // Validate
 exports.create = (req, res) => {
   if (
-    !req.body.id
-    || !req.body.idBuilding
+    !req.body.idBuilding
     || !req.body.idBoiler
     || !req.body.date
     || !req.body.startTime
@@ -56,8 +56,7 @@ exports.update = (req, res) => {
 
   // Validate request
   if (
-    !req.body.id
-    || !req.body.idBuilding
+    !req.body.idBuilding
     || !req.body.idBoiler
     || !req.body.date
     || !req.body.startTime
@@ -73,14 +72,14 @@ exports.update = (req, res) => {
   const { id } = req.params;
 
   return Appointments
-    .findOneAndUpdate({ id }, req.body, { useFindAndModify: false })
+    .findOneAndUpdate({ _id: ObjectId(req.params.id) }, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
         res.status(400).send({
           message: `Can't update the appointment with id ${id}. Appointment was not found`,
         });
       } else {
-        res.send({ message: 'Appointment type was update successfully' });
+        res.send({ message: 'Appointment was update successfully' });
       }
     })
     .catch((err) => {
@@ -95,7 +94,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const { id } = req.params;
   Appointments
-    .findOneAndRemove({ id }, { useFindAndModify: false })
+    .findOneAndRemove({ _id: ObjectId(req.params.id) })
     .then(() => res.send({
       message: 'Appointment was removed successfuly',
     }))
@@ -124,7 +123,7 @@ exports.findAll = (req, res) => {
 
 // Get appointment by id
 exports.findOne = (req, res) => Appointments
-  .findOne({ id: req.params.id })
+  .findOne({ _id: ObjectId(req.params.id) })
   .then((data) => {
     if (!data) {
       return res.status(404).send({
