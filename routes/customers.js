@@ -1,3 +1,4 @@
+/* eslint-disable eol-last */
 const router = require('express').Router();
 const customers = require('../controllers/customers');
 
@@ -17,6 +18,6 @@ router.get('/', customers.findAll);
 router.get('/:id', customers.findOne);
 
 // Get customer by Type
-router.get('/:type', customers.findType);
+router.get('/type/:type', customers.findType);
 
 module.exports = router;

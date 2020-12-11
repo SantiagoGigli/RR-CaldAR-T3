@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const db = {};
 db.mongoose = mongoose;
 db.url = process.env.mongoURL;
-
 db.Technicians = require('./technicians.js')(mongoose);
 db.Buildings = require('./buildings.js')(mongoose);
 db.Customers = require('./customers.js')(mongoose);
