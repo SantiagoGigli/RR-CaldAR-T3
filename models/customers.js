@@ -4,7 +4,7 @@ module.exports = (mongoose) => {
   const customersSchema = new mongoose.Schema({
     type: {
       type: String,
-      enum: ['particular', 'bussiness'],
+      enum: ['particular', 'business'],
       required: true,
     },
     email: String,
@@ -15,6 +15,7 @@ module.exports = (mongoose) => {
     buildings: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'buildings',
+      required: false,
     }],
   },
   { timestamps: true });
