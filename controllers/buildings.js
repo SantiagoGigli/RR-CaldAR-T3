@@ -1,3 +1,4 @@
+const { ObjectID } = require('mongodb');
 const db = require('../models');
 
 const { Buildings } = db;
@@ -6,7 +7,7 @@ const { Buildings } = db;
 // POST http://localhost:3000/buildings/addNew
 exports.create = (req, res) => {
   // Validate
-  if (!req.body.id || !req.body.address) {
+  if (!req.body.address) {
     res.status(400).send({
       message: 'Building Creation need ID and ADDRESS.',
     });
@@ -15,7 +16,6 @@ exports.create = (req, res) => {
 
   // Create
   const building = new Buildings({
-    id: req.body.id,
     address: req.body.address,
     name: req.body.name,
     phone: req.body.phone,
@@ -50,14 +50,14 @@ exports.update = (req, res) => {
   const { id } = req.params;
 
   Buildings
-    .findOneAndUpdate({ id }, req.body, { useFindAndModify: false })
+    .findOneAndUpdate({ _id: ObjectID(req.params.id) }, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
         return res.status(404).send({
-          message: `Building ID: ${id} not found.`,
+          message: `Building ID: ${ObjectID(req.params.id)} not found.`,
         });
       }
-      return res.send({ message: `Building ${id} updated` });
+      return res.send({ message: `Building ${ObjectID(req.params.id)} updated` });
     })
     .catch((err) => {
       res.status(500).send({
@@ -71,11 +71,11 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const { id } = req.params;
   Buildings
-    .findOneAndRemove({ id }, { useFindAndModify: false })
+    .findOneAndRemove({ _id: ObjectID(req.params.id) }, { useFindeAndModify: false })
     .then((data) => {
       if (!data) {
         return res.status(404).send({
-          message: `Building ID: ${id} not found.`,
+          message: `Building ID: ${ObjectID(req.params.id)} not found.`,
         });
       }
       return res.send({ message: `Building ${id} removed` });
@@ -104,23 +104,24 @@ exports.findAll = (req, res) => {
 
 // Retrieve One
 // GET http://localhost:3000/buildings/getById/1
-exports.findOne = (req, res) => Buildings
-  .findOne({ id: req.params.id })
-  .then((data) => {
-    if (!data) {
-      res.status(404).send({
-        message: `Building ID: ${req.params.id} not found.`,
+exports.findOne = (req, res) => {
+  Buildings
+    .findOne({ _id: ObjectID(req.params.id) })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Building ID: ${req.params.id} not found.`,
+        });
+        return;
+      }
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || 'Building Find One Error.',
       });
-      return;
-    }
-    res.send(data);
-  })
-  .catch((err) => {
-    res.status(500).send({
-      message: err.message || 'Building Find One Error.',
     });
-  });
-
+};
 // Retrieve All By Name
 // GET http://localhost:3000/buildings/getAllByName?name=Empire 2
 exports.findAllByName = (req, res) => {

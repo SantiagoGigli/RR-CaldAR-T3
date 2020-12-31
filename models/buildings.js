@@ -1,18 +1,26 @@
-// USE THE CODE BELOW AS EXAMPLE
+const idValidator = require('mongoose-id-validator');
+
 module.exports = (mongoose) => {
-  const buildings = mongoose.model(
+  const buildingsSchema = new mongoose.Schema({
+    address: String,
+    name: String,
+    phone: String,
+    idCustomer: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'customers',
+      require: true,
+    }],
+    boilers: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Boilers',
+      require: true,
+    }],
+  },
+  { timestamps: true });
+  buildingsSchema.plugin(idValidator);
+  const Buildings = mongoose.model(
     'buildings',
-    mongoose.Schema(
-      {
-        id: Number,
-        address: String,
-        name: String,
-        phone: String,
-        idCustomer: Number,
-        boilers: [],
-      },
-      { timestamps: true },
-    ),
+    buildingsSchema,
   );
-  return buildings;
+  return Buildings;
 };
