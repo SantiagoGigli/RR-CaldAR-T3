@@ -47,8 +47,6 @@ exports.update = (req, res) => {
     return;
   }
 
-  const { id } = req.params;
-
   Buildings
     .findOneAndUpdate({ _id: ObjectID(req.params.id) }, req.body, { useFindAndModify: false })
     .then((data) => {
