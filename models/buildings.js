@@ -2,7 +2,6 @@ const idValidator = require('mongoose-id-validator');
 
 module.exports = (mongoose) => {
   const buildingsSchema = new mongoose.Schema({
-    _id: String,
     address: String,
     name: String,
     phone: String,
