@@ -40,7 +40,7 @@ exports.create = (req, res) => {
 // PUT http://localhost:3000/buildings/updateById/1
 exports.update = (req, res) => {
   // Validate
-  if (!req.body.id || !req.body.address) {
+  if (!req.body.address) {
     res.status(400).send({
       message: 'Building Update need ID and ADDRESS.',
     });
@@ -67,7 +67,6 @@ exports.update = (req, res) => {
 // Delete One
 // DELETE http://localhost:3000/buildings/deleteById/1
 exports.delete = (req, res) => {
-  const { id } = req.params;
   Buildings
     .findOneAndRemove({ _id: ObjectID(req.params.id) }, { useFindeAndModify: false })
     .then((data) => {
@@ -76,7 +75,7 @@ exports.delete = (req, res) => {
           message: `Building ID: ${ObjectID(req.params.id)} not found.`,
         });
       }
-      return res.send({ message: `Building ${id} removed` });
+      return res.send({ message: `Building ${ObjectID(req.params.id)} removed` });
     })
     .catch((err) => {
       res.status(500).send({
