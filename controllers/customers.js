@@ -11,7 +11,6 @@ exports.create = (req, res) => {
     !req.body.type
     || !req.body.address
     || !req.body.email
-    || !req.body.buildings
   ) {
     res.status(400).send({
       message: 'Content can not be empty!',
@@ -24,7 +23,7 @@ exports.create = (req, res) => {
     type: req.body.type,
     address: req.body.address,
     email: req.body.email,
-    buildings: ObjectID(req.body.buildings),
+    buildings: req.body.buildings ? ObjectID(req.body.buildings) : null,
   });
 
   // Save
@@ -61,14 +60,15 @@ exports.update = (req, res) => {
   }
 
   Customers
-    .findOneAndUpdate({ _id: ObjectID(req.params.id) }, req.body, { useFindAndModify: false })
+    .findOneAndUpdate({ _id: ObjectID(req.params.id) }, req.body,
+      { new: true, useFindAndModify: false })
     .then((data) => {
       if (!data) {
         res.status(404).send({
           message: `Cannot update Customer with id ${ObjectID(req.params.id)}`,
         });
       }
-      return res.status(200).send({ message: 'Customer was updated succesfully' });
+      return res.status(200).send({ message: 'Customer was updated succesfully', data });
     })
     .catch((err) => res.status(500).send({
       message: err.message || `Error updating Customer with id ${ObjectID(req.params.id)}`,
