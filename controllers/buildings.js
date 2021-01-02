@@ -65,7 +65,6 @@ exports.update = (req, res) => {
 };
 
 // Delete One
-// DELETE http://localhost:3000/buildings/deleteById/1
 exports.delete = (req, res) => {
   Buildings
     .findOneAndRemove({ _id: ObjectID(req.params.id) }, { useFindeAndModify: false })
@@ -85,7 +84,6 @@ exports.delete = (req, res) => {
 };
 
 // Retrieve All
-// GET http://localhost:3000/buildings/getAll
 exports.findAll = (req, res) => {
   Buildings
     .find({})
@@ -100,18 +98,16 @@ exports.findAll = (req, res) => {
 };
 
 // Retrieve One
-// GET http://localhost:3000/buildings/getById/1
 exports.findOne = (req, res) => {
   Buildings
     .findOne({ _id: ObjectID(req.params.id) })
     .then((data) => {
       if (!data) {
-        res.status(404).send({
+        return res.status(404).send({
           message: `Building ID: ${req.params.id} not found.`,
         });
-        return;
       }
-      res.send(data);
+      return res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
@@ -120,7 +116,6 @@ exports.findOne = (req, res) => {
     });
 };
 // Retrieve All By Name
-// GET http://localhost:3000/buildings/getAllByName?name=Empire 2
 exports.findAllByName = (req, res) => {
   const namePar = req.query.name;
   Buildings
@@ -136,7 +131,6 @@ exports.findAllByName = (req, res) => {
 };
 
 // Retrieve All By Boiler ID
-// GET http://localhost:3000/buildings/getAllByBoilerId/1
 exports.getAllByBoilerId = (req, res) => Buildings
   .find({ boilers: parseInt(req.params.id) })
   .then((data) => {
