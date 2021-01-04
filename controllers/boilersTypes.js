@@ -43,7 +43,7 @@ exports.update = (req, res) => {
   }
 
   // Validate request
-  if (!req.body.id || !req.body.description || !req.body.stock) {
+  if (!req.body.description || !req.body.stock) {
     res.status(400).send({
       message: 'Content can not be empty',
     });

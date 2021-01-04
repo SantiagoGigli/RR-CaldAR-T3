@@ -1,13 +1,15 @@
+const idValidator = require('mongoose-id-validator');
+
 module.exports = (mongoose) => {
-  const boilersType = mongoose.model(
+  const boilersTypeSchema = new mongoose.Schema({
+    description: String,
+    stock: Number,
+  },
+  { timestamps: true });
+  boilersTypeSchema.plugin(idValidator);
+  const BoilersType = mongoose.model(
     'BoilersType',
-    mongoose.Schema(
-      {
-        description: String,
-        stock: Number,
-      },
-      { timestamps: true },
-    ),
+    boilersTypeSchema,
   );
-  return boilersType;
+  return BoilersType;
 };
