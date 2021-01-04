@@ -5,11 +5,11 @@ module.exports = (mongoose) => {
     address: String,
     name: String,
     phone: String,
-    idCustomer: [{
+    idCustomer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'customers',
       require: true,
-    }],
+    },
     boilers: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Boilers',
